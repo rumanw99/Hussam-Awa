@@ -3,7 +3,7 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET(request: NextRequest) {
   try {
-    const data = readData();
+    const data = await readData();
     const { searchParams } = new URL(request.url);
     const section = searchParams.get('section');
 
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid section' }, { status: 400 });
     }
 
-    const data = readData();
+    const data = await readData();
     
     // Handle aboutMe separately as it's a string, not an array
     if (section === 'aboutMe') {
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       data.resume[section].push(item);
     }
     
-    writeData(data);
+    await writeData(data);
     return NextResponse.json(section === 'aboutMe' ? { content } : (newData || item), { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to add resume item' }, { status: 500 });
@@ -58,9 +58,9 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid section' }, { status: 400 });
     }
 
-    const data = readData();
+    const data = await readData();
     data.resume[section] = items;
-    writeData(data);
+    await writeData(data);
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update resume section' }, { status: 500 });

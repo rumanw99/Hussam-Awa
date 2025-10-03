@@ -3,7 +3,7 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
-    const data = readData();
+    const data = await readData();
     return NextResponse.json(data.testimonials || []);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to read testimonials' }, { status: 500 });
@@ -13,14 +13,14 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const testimonial = await request.json();
-    const data = readData();
+    const data = await readData();
     
     if (!data.testimonials) {
       data.testimonials = [];
     }
     
     data.testimonials.push(testimonial);
-    writeData(data);
+    await writeData(data);
     return NextResponse.json(testimonial, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to add testimonial' }, { status: 500 });
@@ -37,9 +37,9 @@ export async function PUT(request: NextRequest) {
     }
     
     const updatedTestimonial = await request.json();
-    const data = readData();
+    const data = await readData();
     data.testimonials[parseInt(index)] = updatedTestimonial;
-    writeData(data);
+    await writeData(data);
     
     return NextResponse.json(updatedTestimonial);
   } catch (error) {
@@ -56,9 +56,9 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Index is required' }, { status: 400 });
     }
     
-    const data = readData();
+    const data = await readData();
     data.testimonials.splice(parseInt(index), 1);
-    writeData(data);
+    await writeData(data);
     
     return NextResponse.json({ success: true });
   } catch (error) {

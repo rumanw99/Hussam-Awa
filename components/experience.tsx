@@ -46,6 +46,38 @@ export default function Experience() {
     )
   }
 
+  // Show section even if no data
+  if (experiences.length === 0) {
+    return (
+      <section id="experience" className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-4 text-blue-600 dark:text-blue-400"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Professional Journey
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            A Timeline of Impactful Roles
+          </motion.p>
+          <div className="w-16 h-1 mb-12 bg-yellow-400" />
+          <div className="text-center text-gray-500 dark:text-gray-400">
+            No experience data available. Please add experience through the admin panel.
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   const containerVariants = {
     hidden: {},
     visible: {
