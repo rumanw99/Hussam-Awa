@@ -11,15 +11,21 @@ import Image from "next/image"
 // VideoThumbnail component using predefined thumbnails
 const VideoThumbnail = ({ src, alt, className, thumbnail }: { src: string; alt: string; className?: string; thumbnail?: string }) => {
   const [loading, setLoading] = useState(true)
+  const [imageError, setImageError] = useState(false)
 
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 500)
+    }, 300)
 
     return () => clearTimeout(timer)
   }, [src])
+
+  const handleImageError = () => {
+    setImageError(true)
+    setLoading(false)
+  }
 
   return (
     <div className={`relative ${className}`}>
@@ -27,16 +33,21 @@ const VideoThumbnail = ({ src, alt, className, thumbnail }: { src: string; alt: 
         <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">
           <Video className="w-8 h-8 text-gray-400" />
         </div>
-      ) : thumbnail ? (
+      ) : thumbnail && !imageError ? (
         <Image
           src={thumbnail}
           alt={alt}
           fill
           className="object-cover"
+          onError={handleImageError}
+          onLoad={() => setLoading(false)}
         />
       ) : (
         <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-          <Video className="w-16 h-16 text-white/80" />
+          <div className="text-center text-white">
+            <Video className="w-16 h-16 mx-auto mb-2 text-white/80" />
+            <p className="text-sm font-medium">Video Preview</p>
+          </div>
         </div>
       )}
     </div>
