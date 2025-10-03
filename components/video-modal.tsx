@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -18,12 +18,17 @@ interface VideoModalProps {
 }
 
 export default function VideoModal({ video, videos, currentIndex, onClose, onNext, onPrev }: VideoModalProps) {
+  const [videoError, setVideoError] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     document.body.style.overflow = "hidden"
+    setVideoError(false)
+    setIsLoading(true)
     return () => {
       document.body.style.overflow = ""
     }
-  }, [])
+  }, [video.src])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -96,41 +101,65 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
           <X className="w-7 h-7" />
         </motion.button>
 
-        <div className="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border-2 border-yellow-400/20">
-          <video
-            src={video.src}
-            controls
-            preload="metadata"
-            className="w-full h-full object-contain"
-            controlsList="nodownload"
-            playsInline
-            webkit-playsinline="true"
-            crossOrigin="anonymous"
-            onError={(e) => {
-              console.error('Video load error:', e);
-              const target = e.target as HTMLVideoElement;
-              target.style.display = 'none';
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'w-full h-full flex items-center justify-center text-white';
-              errorDiv.innerHTML = `
-                <div class="text-center">
-                  <div class="text-6xl mb-4">🎥</div>
-                  <h3 class="text-xl font-bold mb-2">Video Not Available</h3>
-                  <p class="text-gray-300">This video is currently unavailable</p>
-                  <button onclick="window.location.reload()" class="mt-4 px-4 py-2 bg-yellow-400 text-blue-900 rounded-lg hover:bg-yellow-500 transition-colors">
-                    Try Again
-                  </button>
-                </div>
-              `;
-              target.parentNode?.appendChild(errorDiv);
-            }}
-            onLoadStart={() => {
-              console.log('Video loading started:', video.src);
-            }}
-            onCanPlay={() => {
-              console.log('Video can play:', video.src);
-            }}
-          />
+        <div className="w-full aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border-2 border-yellow-400/20 relative">
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+              <div className="text-center text-white">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mx-auto mb-4"></div>
+                <p className="text-lg">Loading video...</p>
+              </div>
+            </div>
+          )}
+          
+          {videoError ? (
+            <div className="w-full h-full flex items-center justify-center text-white">
+              <div className="text-center">
+                <div className="text-6xl mb-4">🎥</div>
+                <h3 className="text-xl font-bold mb-2">Video Not Available</h3>
+                <p className="text-gray-300 mb-4">This video is currently unavailable</p>
+                <button 
+                  onClick={() => {
+                    setVideoError(false)
+                    setIsLoading(true)
+                    window.location.reload()
+                  }} 
+                  className="px-4 py-2 bg-yellow-400 text-blue-900 rounded-lg hover:bg-yellow-500 transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          ) : (
+            <video
+              src={video.src}
+              controls
+              preload="none"
+              className="w-full h-full object-contain"
+              controlsList="nodownload"
+              playsInline
+              webkit-playsinline="true"
+              muted
+              onError={(e) => {
+                console.error('Video load error:', e);
+                setVideoError(true)
+                setIsLoading(false)
+              }}
+              onLoadStart={() => {
+                console.log('Video loading started:', video.src);
+              }}
+              onCanPlay={() => {
+                console.log('Video can play:', video.src);
+                setIsLoading(false)
+              }}
+              onLoadedData={() => {
+                console.log('Video data loaded:', video.src);
+                setIsLoading(false)
+              }}
+              onLoadedMetadata={() => {
+                console.log('Video metadata loaded:', video.src);
+              }}
+            />
+          )}
         </div>
 
         <motion.div 
