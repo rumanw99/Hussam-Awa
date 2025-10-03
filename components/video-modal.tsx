@@ -100,9 +100,26 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
           <video
             src={video.src}
             controls
-            autoPlay
+            preload="metadata"
             className="w-full h-full object-contain"
             controlsList="nodownload"
+            playsInline
+            webkit-playsinline="true"
+            onError={(e) => {
+              console.error('Video load error:', e);
+              const target = e.target as HTMLVideoElement;
+              target.style.display = 'none';
+              const errorDiv = document.createElement('div');
+              errorDiv.className = 'w-full h-full flex items-center justify-center text-white';
+              errorDiv.innerHTML = `
+                <div class="text-center">
+                  <div class="text-6xl mb-4">🎥</div>
+                  <h3 class="text-xl font-bold mb-2">Video Not Available</h3>
+                  <p class="text-gray-300">This video is currently unavailable</p>
+                </div>
+              `;
+              target.parentNode?.appendChild(errorDiv);
+            }}
           />
         </div>
 
