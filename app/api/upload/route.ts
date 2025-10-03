@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { put } from '@vercel/blob';
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,28 +27,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: `File size exceeds ${limit} limit` }, { status: 400 });
     }
 
+    // Check if BLOB_READ_WRITE_TOKEN is available
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      return NextResponse.json({ 
+        error: 'BLOB_READ_WRITE_TOKEN not configured. Please set up Vercel Blob Storage.' 
+      }, { status: 500 });
+    }
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      mkdirSync(uploadsDir, { recursive: true });
-    }
 
     // Generate unique filename
     const timestamp = Date.now();
     const originalName = file.name.replace(/\s+/g, '-');
     const filename = `${timestamp}-${originalName}`;
-    const filepath = join(uploadsDir, filename);
 
-    // Save file
-    await writeFile(filepath, buffer);
+    // Upload to Vercel Blob Storage
+    const blob = await put(filename, buffer, {
+      access: 'public',
+      token: process.env.BLOB_READ_WRITE_TOKEN
+    });
 
-    // Return the public URL
-    const publicUrl = `/uploads/${filename}`;
-    
-    return NextResponse.json({ url: publicUrl }, { status: 201 });
+    return NextResponse.json({ url: blob.url }, { status: 201 });
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
