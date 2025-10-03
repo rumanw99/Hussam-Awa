@@ -8,58 +8,17 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Skeleton } from "@/components/ui/skeleton"
 import Image from "next/image"
 
-// VideoThumbnail component for generating thumbnails from video frames
-const VideoThumbnail = ({ src, alt, className }: { src: string; alt: string; className?: string }) => {
-  const [thumbnail, setThumbnail] = useState<string | null>(null)
+// VideoThumbnail component using predefined thumbnails
+const VideoThumbnail = ({ src, alt, className, thumbnail }: { src: string; alt: string; className?: string; thumbnail?: string }) => {
   const [loading, setLoading] = useState(true)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const generateThumbnail = () => {
-      if (!videoRef.current || !canvasRef.current) return
-
-      const video = videoRef.current
-      const canvas = canvasRef.current
-      const ctx = canvas.getContext('2d')
-
-      if (!ctx) return
-
-      // Set canvas size to match video dimensions
-      canvas.width = video.videoWidth || 400
-      canvas.height = video.videoHeight || 300
-
-      // Draw the current frame to canvas
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
-
-      // Convert canvas to data URL
-      const dataURL = canvas.toDataURL('image/jpeg', 0.8)
-      setThumbnail(dataURL)
+    // Simulate loading time
+    const timer = setTimeout(() => {
       setLoading(false)
-    }
+    }, 500)
 
-    const handleLoadedData = () => {
-      if (videoRef.current) {
-        // Seek to 2 seconds or 10% of video duration
-        const seekTime = Math.min(2, videoRef.current.duration * 0.1)
-        videoRef.current.currentTime = seekTime
-      }
-    }
-
-    const handleSeeked = () => {
-      generateThumbnail()
-    }
-
-    const video = videoRef.current
-    if (video) {
-      video.addEventListener('loadeddata', handleLoadedData)
-      video.addEventListener('seeked', handleSeeked)
-      
-      return () => {
-        video.removeEventListener('loadeddata', handleLoadedData)
-        video.removeEventListener('seeked', handleSeeked)
-      }
-    }
+    return () => clearTimeout(timer)
   }, [src])
 
   return (
@@ -76,25 +35,10 @@ const VideoThumbnail = ({ src, alt, className }: { src: string; alt: string; cla
           className="object-cover"
         />
       ) : (
-        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-          <Video className="w-8 h-8 text-gray-400" />
+        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <Video className="w-16 h-16 text-white/80" />
         </div>
       )}
-      
-      {/* Hidden video element for thumbnail generation */}
-      <video
-        ref={videoRef}
-        src={src}
-        preload="metadata"
-        className="hidden"
-        muted
-      />
-      
-      {/* Hidden canvas for thumbnail generation */}
-      <canvas
-        ref={canvasRef}
-        className="hidden"
-      />
     </div>
   )
 }
@@ -635,6 +579,7 @@ export default function Portfolio() {
                     src={video.src}
                     alt={video.title}
                     className="w-full h-full"
+                    thumbnail={video.thumbnail}
                   />
                       
                       {/* Enhanced play button overlay */}
