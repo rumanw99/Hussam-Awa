@@ -1,37 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import { kv } from '@vercel/kv';
 
 const dataPath = path.join(process.cwd(), 'data.json');
 
-// Check if we're in production (Vercel) or development
-const isProduction = process.env.NODE_ENV === 'production' && process.env.VERCEL;
+// For now, always use local file storage
+const useLocalStorage = true;
 
 export async function readData() {
-  if (isProduction) {
-    // Use Vercel KV in production
-    try {
-      const data = await kv.get('portfolio-data');
-      if (data) {
-        return data;
-      }
-      
-      // If no data exists, try to read from local file and migrate
-      try {
-        const localData = fs.readFileSync(dataPath, 'utf8');
-        const parsedData = JSON.parse(localData);
-        await kv.set('portfolio-data', parsedData);
-        return parsedData;
-      } catch {
-        // Return default data if no local file exists
-        return getDefaultData();
-      }
-    } catch (error) {
-      console.error('Error reading from KV:', error);
-      return getDefaultData();
-    }
-  } else {
-    // Use local file in development
+  if (useLocalStorage) {
+    // Use local file storage
     try {
       const data = fs.readFileSync(dataPath, 'utf8');
       return JSON.parse(data);
@@ -43,17 +20,8 @@ export async function readData() {
 }
 
 export async function writeData(data: any) {
-  if (isProduction) {
-    // Use Vercel KV in production
-    try {
-      await kv.set('portfolio-data', data);
-      console.log('✅ Data saved to KV storage');
-    } catch (error) {
-      console.error('Error writing to KV:', error);
-      throw error;
-    }
-  } else {
-    // Use local file in development
+  if (useLocalStorage) {
+    // Use local file storage
     try {
       fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
       console.log('✅ Data saved to local file');
