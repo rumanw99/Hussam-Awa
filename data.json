@@ -1,0 +1,244 @@
+{
+  "hero": {
+    "name": "Hussam Awa",
+    "titles": [
+      "Executive Producer",
+      "HR Manager",
+      "Sales Manager",
+      "Marketing Manager"
+    ],
+    "description": "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
+    "profileImage": "/uploads/1759453555301-HUSSAM.jpg"
+  },
+  "photos": [
+    {
+      "title": "Wedding Day",
+      "description": "Beautiful moments from a wedding ceremony.",
+      "category": "Wedding",
+      "url": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.17%20AM-260S0kGXlmtR6XxQXsdcDl9ZGLn8K0.jpeg"
+    },
+    {
+      "title": "Corporate Event",
+      "description": "Highlights from a corporate gathering.",
+      "category": "Corporate",
+      "url": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.18%20AM-kV9xEAuLTpUEnxVr0ue1ZzhNsCmaMi.jpeg"
+    },
+    {
+      "title": "Portrait Shoot",
+      "description": "Studio portrait photography.",
+      "category": "Portrait",
+      "url": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.17%20AM%20%281%29-elgrYlm3la1jNM3pcf56fvtAxVHks1.jpeg"
+    },
+    {
+      "title": "ward",
+      "description": "ward is ward",
+      "category": "Event",
+      "url": "/uploads/1759470984309-WhatsApp-Image-2025-09-28-at-9.19.37-PM-(1).jpeg"
+    }
+  ],
+  "videos": [
+    {
+      "title": "Portfolio Video 1",
+      "description": "A professional video showcase from our portfolio.",
+      "category": "Corporate",
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.22.59 AM.mp4",
+      "thumbnail": "/images/vedio1.png"
+    },
+    {
+      "title": "Portfolio Video 2",
+      "description": "Highlights from a creative project.",
+      "category": "Event",
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.01 AM.mp4",
+      "thumbnail": "/images/vedio2.png"
+    },
+    {
+      "title": "Portfolio Video 3",
+      "description": "Showcasing our video production skills.",
+      "category": "Corporate",
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.04 AM.mp4",
+      "thumbnail": "/images/vedio3.png"
+    },
+    {
+      "title": "Portfolio Video 4",
+      "description": "A dynamic video presentation.",
+      "category": "Event",
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.07 AM.mp4",
+      "thumbnail": "/images/vedio4.png"
+    },
+    {
+      "title": "Portfolio Video 5",
+      "description": "Creative storytelling through video.",
+      "category": "Corporate",
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.11 AM.mp4",
+      "thumbnail": "/images/vedio5.png"
+    },
+    {
+      "title": "Portfolio Video 6",
+      "description": "Professional video content creation.",
+      "category": "Event",
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.14 AM.mp4",
+      "thumbnail": "/images/vedio6.png"
+    }
+  ],
+  "about": {
+    "title": "Golden Visa Holder",
+    "profileImage": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg",
+    "content": "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. Seeking a senior position that leverages my skills in developing and executing marketing strategies, producing multimedia content, and leading creative teams to deliver exceptional results.\n\nMy expertise includes developing and executing marketing strategies, positioning, research, and branding for various production companies and Media Zone Authority \"twofour54\". I specialize in producing multimedia content for TV, web, and social media platforms, including documentaries, commercials, and corporate videos.\n\nWith a proven track record in managing sales and business development activities, I've generated over $5 million in revenue and secured long-term partnerships with key clients. I take pride in leading and mentoring teams of up to 20 creative professionals, enhancing employee relations and performance.",
+    "stats": [
+      {
+        "icon": "Briefcase",
+        "value": "12+",
+        "label": "Years Experience"
+      },
+      {
+        "icon": "DollarSign",
+        "value": "$5M+",
+        "label": "Revenue Generated"
+      },
+      {
+        "icon": "Users",
+        "value": "20+",
+        "label": "Team Members Led"
+      },
+      {
+        "icon": "Award",
+        "value": "100+",
+        "label": "Projects Completed"
+      }
+    ]
+  },
+  "resume": {
+    "experience": [
+      {
+        "position": "PR & Sales Manager",
+        "company": "SAMIT Event Management",
+        "startDate": "2022-08-01",
+        "endDate": "",
+        "description": "Orchestrated site selection for photography, securing permits through effective collaboration\nLed cross-functional production team members to optimize workflow\nSpearheaded the identification and scheduling of actors and singers\nManaged end-to-end bookings including hotels and tickets"
+      },
+      {
+        "position": "Events Manager",
+        "company": "iPro General Trading FZLLC",
+        "startDate": "2019-01-01",
+        "endDate": "2023-08-31",
+        "description": "Developed and executed comprehensive sales and marketing plans\nEstablished communication channels with various media outlets\nOversaw coordination of charity concerts and managed contracts\nDirected team to ensure seamless execution of diverse events"
+      },
+      {
+        "position": "Executive Producer",
+        "company": "ProX Production FZLLC",
+        "startDate": "2013-04-01",
+        "endDate": "2019-12-31",
+        "description": "Led job analysis project to evaluate and redesign positions\nDesigned new performance management system to boost productivity\nImplemented training and development system programs\nPlanned health insurance system for the organization"
+      }
+    ],
+    "aboutMe": "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. Seeking a senior position that leverages my skills in developing and executing marketing strategies, producing multimedia content, and leading creative teams to deliver exceptional results.\n\nMy expertise includes developing and executing marketing strategies, positioning, research, and branding for various production companies and Media Zone Authority \"twofour54\". I specialize in producing multimedia content for TV, web, and social media platforms, including documentaries, commercials, and corporate videos.\n\nWith a proven track record in managing sales and business development activities, I've generated over $5 million in revenue and secured long-term partnerships with key clients. I take pride in leading and mentoring teams of up to 20 creative professionals, enhancing employee relations and performance.",
+    "skills": [
+      {
+        "name": "Strategic Planning",
+        "level": "Expert"
+      },
+      {
+        "name": "Media Production",
+        "level": "Expert"
+      },
+      {
+        "name": "Team Leadership",
+        "level": "Advanced"
+      },
+      {
+        "name": "Business Development",
+        "level": "Expert"
+      },
+      {
+        "name": "HR Management",
+        "level": "Advanced"
+      },
+      {
+        "name": "Multilingual Communication",
+        "level": "Expert"
+      }
+    ]
+  },
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "position": "Event Coordinator",
+      "company": "Elite Events Co.",
+      "content": "Hussam's attention to detail and creative vision transformed our corporate event into an unforgettable experience. The photography captured every moment perfectly, and the video production was outstanding.",
+      "image": "/uploads/1759456786476-WhatsApp-Image-2025-09-28-at-9.19.37-PM-(1).jpeg",
+      "rating": 5
+    },
+    {
+      "name": "Ahmed Al-Rashid",
+      "position": "Wedding Planner",
+      "company": "Dream Weddings UAE",
+      "content": "Working with Hussam was a dream come true for our clients. His professional approach and artistic eye created magical moments that our couples will cherish forever. Highly recommended!",
+      "image": "/uploads/1759456801586-WhatsApp-Image-2025-09-30-at-12.18.16-AM-(1).jpeg",
+      "rating": 5
+    },
+    {
+      "name": "Maria Rodriguez",
+      "position": "Marketing Director",
+      "company": "Global Brands Inc.",
+      "content": "The promotional videos Hussam created for our brand launch exceeded all expectations. His storytelling ability and technical expertise brought our vision to life in ways we never imagined.",
+      "image": "/uploads/1759456842671-WhatsApp-Image-2025-09-30-at-12.18.17-AM-(1).jpeg",
+      "rating": 5
+    },
+    {
+      "name": "David Chen",
+      "position": "CEO",
+      "company": "Tech Innovations Ltd.",
+      "content": "Hussam's work on our product launch event was exceptional. From concept to execution, he delivered high-quality content that perfectly captured our brand's innovative spirit.",
+      "image": "/uploads/1759456818407-WhatsApp-Image-2025-09-30-at-12.18.17-AM.jpeg",
+      "rating": 5
+    }
+  ],
+  "contact": {
+    "email": "rumanw99@gmail.com",
+    "phone": "+971 50 1883240",
+    "location": "Dubai Sports City, UAE",
+    "linkedin": "https://www.linkedin.com/in/hussam-awa-aaa47998/",
+    "socialLinks": {
+      "twitter": "",
+      "instagram": "",
+      "facebook": ""
+    }
+  },
+  "settings": {
+    "name": "Hussam Awa",
+    "title": "",
+    "email": "rumanw99@gmail.com",
+    "phone": "0958",
+    "linkedin": "",
+    "profilePhoto": ""
+  },
+  "blog": [
+    {
+      "id": "1",
+      "title": "Welcome to My Blog",
+      "date": "2023-10-01",
+      "excerpt": "This is the first post on my portfolio blog.",
+      "content": "# Welcome to My Blog\n\nHello! This is my first blog post. I'm excited to share updates and thoughts here.\n\n## What to Expect\n\n- Project updates\n- Industry insights\n- Personal reflections\n\nStay tuned for more content!",
+      "author": "Hussam Awa",
+      "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    },
+    {
+      "id": "2",
+      "title": "Latest Project Update",
+      "date": "2023-10-05",
+      "excerpt": "An update on my recent work.",
+      "content": "# Latest Project Update\n\nI've been working on some exciting new features for my portfolio.\n\n## New Features\n\n- Added dark mode support\n- Improved performance\n- Enhanced user experience\n\nCheck it out!",
+      "author": "Hussam Awa",
+      "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80"
+    },
+    {
+      "id": "1759459656313",
+      "title": "ward",
+      "date": "2025-10-02",
+      "excerpt": "i am ward",
+      "content": "wardwwwwwwwwww",
+      "author": "Hussam Awa",
+      "coverImage": "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+    }
+  ]
+}
