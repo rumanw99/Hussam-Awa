@@ -105,6 +105,7 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
             controlsList="nodownload"
             playsInline
             webkit-playsinline="true"
+            crossOrigin="anonymous"
             onError={(e) => {
               console.error('Video load error:', e);
               const target = e.target as HTMLVideoElement;
@@ -116,9 +117,18 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
                   <div class="text-6xl mb-4">🎥</div>
                   <h3 class="text-xl font-bold mb-2">Video Not Available</h3>
                   <p class="text-gray-300">This video is currently unavailable</p>
+                  <button onclick="window.location.reload()" class="mt-4 px-4 py-2 bg-yellow-400 text-blue-900 rounded-lg hover:bg-yellow-500 transition-colors">
+                    Try Again
+                  </button>
                 </div>
               `;
               target.parentNode?.appendChild(errorDiv);
+            }}
+            onLoadStart={() => {
+              console.log('Video loading started:', video.src);
+            }}
+            onCanPlay={() => {
+              console.log('Video can play:', video.src);
             }}
           />
         </div>

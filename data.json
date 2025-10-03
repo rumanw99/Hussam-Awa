@@ -41,42 +41,42 @@
       "title": "Portfolio Video 1",
       "description": "A professional video showcase from our portfolio.",
       "category": "Corporate",
-      "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+      "url": "https://www.w3schools.com/html/mov_bbb.mp4",
       "thumbnail": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop&crop=center"
     },
     {
       "title": "Portfolio Video 2",
       "description": "Highlights from a creative project.",
       "category": "Event",
-      "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+      "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       "thumbnail": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=600&fit=crop&crop=center"
     },
     {
       "title": "Portfolio Video 3",
       "description": "Showcasing our video production skills.",
       "category": "Corporate",
-      "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+      "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
       "thumbnail": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&crop=center"
     },
     {
       "title": "Portfolio Video 4",
       "description": "A dynamic video presentation.",
       "category": "Event",
-      "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+      "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
       "thumbnail": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop&crop=center"
     },
     {
       "title": "Portfolio Video 5",
       "description": "Creative storytelling through video.",
       "category": "Corporate",
-      "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4",
+      "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
       "thumbnail": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=600&fit=crop&crop=center"
     },
     {
       "title": "Portfolio Video 6",
       "description": "Professional video content creation.",
       "category": "Event",
-      "url": "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_5mb.mp4",
+      "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
       "thumbnail": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&crop=center"
     }
   ],
