@@ -8,7 +8,10 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['hebbkx1anhila5yf.public.blob.vercel-storage.com'],
+    domains: [
+      'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+      '*.public.blob.vercel-storage.com'
+    ],
   },
 }
 

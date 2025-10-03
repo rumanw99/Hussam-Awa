@@ -3,7 +3,7 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
-    const data = readData();
+    const data = await readData();
     return NextResponse.json(data.hero || {
       name: "Hussam Awa",
       titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
@@ -18,9 +18,9 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const heroData = await request.json();
-    const data = readData();
+    const data = await readData();
     data.hero = heroData;
-    writeData(data);
+    await writeData(data);
     return NextResponse.json(heroData, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update hero data' }, { status: 500 });

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { generateTokenEdge } from '../../../../lib/auth-edge';
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'wardidea02@gmail.com';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ward123456';
 
 export async function POST(request: NextRequest) {
   try {

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { verifyTokenEdge } from './lib/auth-edge';
 
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'wardidea02@gmail.com';
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;

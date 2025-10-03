@@ -3,7 +3,7 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
-    const data = readData();
+    const data = await readData();
     return NextResponse.json(data.about || {
       title: "Golden Visa Holder",
       profileImage: "",
@@ -23,9 +23,9 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const aboutData = await request.json();
-    const data = readData();
+    const data = await readData();
     data.about = aboutData;
-    writeData(data);
+    await writeData(data);
     return NextResponse.json(aboutData, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update about data' }, { status: 500 });

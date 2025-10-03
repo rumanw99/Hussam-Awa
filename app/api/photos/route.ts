@@ -3,7 +3,7 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
-    const data = readData();
+    const data = await readData();
     return NextResponse.json(data.photos);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to read photos' }, { status: 500 });
@@ -13,9 +13,9 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const newPhoto = await request.json();
-    const data = readData();
+    const data = await readData();
     data.photos.push(newPhoto);
-    writeData(data);
+    await writeData(data);
     return NextResponse.json(newPhoto, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to add photo' }, { status: 500 });
@@ -32,9 +32,9 @@ export async function PUT(request: NextRequest) {
     }
     
     const updatedPhoto = await request.json();
-    const data = readData();
+    const data = await readData();
     data.photos[parseInt(index)] = updatedPhoto;
-    writeData(data);
+    await writeData(data);
     
     return NextResponse.json(updatedPhoto);
   } catch (error) {
@@ -51,9 +51,9 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: 'Index is required' }, { status: 400 });
     }
     
-    const data = readData();
+    const data = await readData();
     data.photos.splice(parseInt(index), 1);
-    writeData(data);
+    await writeData(data);
     
     return NextResponse.json({ success: true });
   } catch (error) {
