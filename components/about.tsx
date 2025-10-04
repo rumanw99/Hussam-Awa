@@ -1,9 +1,10 @@
 "use client"
 
-import { Award, DollarSign, Users, Briefcase } from "lucide-react"
+import { Award, DollarSign, Users, Briefcase, Star, TrendingUp, Target, Zap } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
+import { motion } from "framer-motion"
 
 export default function About() {
   const [isVisible, setIsVisible] = useState(false)
@@ -97,24 +98,50 @@ export default function About() {
     <section
       ref={ref}
       id="about"
-      className={`py-24 bg-gradient-to-br from-white via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 ${
-        isVisible ? "animate-fadeIn" : ""
-      }`}
+      className="py-24 bg-gradient-to-br from-white via-blue-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
     >
       <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-blue-600 dark:text-blue-400">
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold mb-4 text-blue-600 dark:text-blue-400"
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           About Me
-        </h2>
-        <div className="w-16 h-1 mb-12 bg-yellow-400" />
+        </motion.h2>
+        <motion.div
+          className="w-16 h-1 mb-12 bg-yellow-400"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        />
 
         <div className="grid md:grid-cols-3 gap-12 items-start">
-          <div className="md:col-span-1 flex justify-center">
+          <motion.div
+            className="md:col-span-1 flex justify-center"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             <div className="relative">
-              <div
-                className="absolute -inset-4 rounded-full border-4"
-                style={{ borderColor: "#F4B400" }}
+              <motion.div
+                className="absolute -inset-4 rounded-full border-4 border-yellow-400"
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                viewport={{ once: true }}
               />
-              <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-xl hover:scale-105 transition-transform duration-300">
+              <motion.div
+                className="relative w-64 h-64 rounded-full overflow-hidden shadow-2xl"
+                whileHover={{ 
+                  scale: 1.05,
+                  rotate: 2
+                }}
+                transition={{ duration: 0.3 }}
+              >
                 {aboutData.profileImage ? (
                   <Image
                     src={aboutData.profileImage}
@@ -124,50 +151,91 @@ export default function About() {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
                     <span className="text-white text-2xl font-bold">HA</span>
                   </div>
                 )}
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="md:col-span-2 space-y-6 animate-slideUp">
-            <div className="p-8 rounded-lg bg-blue-50 dark:bg-gray-800">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-1 bg-yellow-400" />
-                <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
+          <motion.div
+            className="md:col-span-2 space-y-8"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              className="p-8 rounded-2xl bg-blue-50 dark:bg-gray-800 border border-blue-200 dark:border-gray-700 shadow-lg"
+              whileHover={{ 
+                scale: 1.02,
+                boxShadow: "0 20px 40px rgba(26, 77, 161, 0.15)"
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <motion.div
+                  className="w-12 h-1 bg-gradient-to-r from-yellow-400 to-yellow-500"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "3rem" }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  viewport={{ once: true }}
+                />
+                <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                   {aboutData.title}
                 </h3>
               </div>
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 {loading ? (
-                  <p className="text-gray-400">Loading...</p>
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 bg-yellow-400 rounded-full animate-pulse"></div>
+                    <p className="text-gray-400">Loading...</p>
+                  </div>
                 ) : aboutData.content ? (
-                  <p className="whitespace-pre-wrap">{aboutData.content}</p>
+                  <p className="whitespace-pre-wrap text-lg leading-relaxed">{aboutData.content}</p>
                 ) : (
                   <p className="text-gray-500 italic">No content available</p>
                 )}
               </div>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <motion.div
+              className="grid grid-cols-2 md:grid-cols-4 gap-6"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
               {aboutData.stats.map((stat, index) => {
                 const IconComponent = getIcon(stat.icon)
                 return (
-                  <div
+                  <motion.div
                     key={index}
-                    className="text-white p-6 rounded-lg text-center hover:scale-105 hover:shadow-2xl transition-all duration-300 bg-blue-600 dark:bg-blue-700"
-                    style={{ boxShadow: "0 0 20px rgba(244, 180, 0, 0.5)" }}
+                    className="text-white p-6 rounded-2xl text-center bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg hover:shadow-xl transition-all duration-300"
+                    whileHover={{ 
+                      scale: 1.05,
+                      y: -5
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true }}
                   >
-                    <IconComponent className="w-8 h-8 mx-auto mb-2 text-yellow-400" />
-                    <div className="text-3xl font-bold mb-1 text-yellow-400">{stat.value}</div>
-                    <div className="text-sm">{stat.label}</div>
-                  </div>
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <IconComponent className="w-8 h-8 mx-auto mb-3 text-yellow-400" />
+                    </motion.div>
+                    <div className="text-3xl font-bold mb-2 text-yellow-400">{stat.value}</div>
+                    <div className="text-sm font-medium">{stat.label}</div>
+                  </motion.div>
                 )
               })}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>
