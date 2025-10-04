@@ -122,6 +122,12 @@ export default function Contact() {
               <h3 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">
                 Contact Information
               </h3>
+              <div className="mb-6 p-4 bg-blue-50 dark:bg-gray-700 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                  I'm an Executive Producer, HR, Sales Manager and Marketing Manager with 12+ years of experience in the media industry. 
+                  I'm currently in Dubai and open to any opportunity. Feel free to contact me for any inquiries or to discuss potential collaborations.
+                </p>
+              </div>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon
@@ -176,6 +182,12 @@ export default function Contact() {
               <h3 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">
                 Send Me a Message
               </h3>
+              <div className="mb-6 p-4 bg-yellow-50 dark:bg-gray-700 rounded-lg">
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+                  <strong>Available for:</strong> Executive Producer roles, Marketing & Sales Management positions, HR Management opportunities, 
+                  Media Production projects, Event Management, and Business Development collaborations.
+                </p>
+              </div>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                   <FormField

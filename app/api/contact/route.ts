@@ -3,19 +3,29 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
-    const data = readData();
-    return NextResponse.json(data.contact || {
-      email: '',
-      phone: '',
-      location: '',
-      linkedin: '',
+    console.log('Contact API - Starting request...');
+    const data = await readData();
+    console.log('Contact API - Full data loaded:', !!data);
+    console.log('Contact API - Contact data exists:', !!data.contact);
+    
+    // Default contact data with Hussam Awa's real information
+    const defaultContact = {
+      email: 'hussam.awa@icloud.com',
+      phone: '+971 50 1883240',
+      location: 'Dubai Sports City, UAE',
+      linkedin: 'https://www.linkedin.com/in/hussam-awa-aaa47998/',
       socialLinks: {
         twitter: '',
         instagram: '',
         facebook: ''
       }
-    });
+    };
+    
+    const contactData = data.contact && data.contact.email ? data.contact : defaultContact;
+    console.log('Contact API - Returning contact data:', contactData);
+    return NextResponse.json(contactData);
   } catch (error) {
+    console.error('Contact API - Error:', error);
     return NextResponse.json({ error: 'Failed to read contact info' }, { status: 500 });
   }
 }
