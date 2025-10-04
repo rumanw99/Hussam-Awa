@@ -51,6 +51,9 @@ export default function About() {
         if (response.ok) {
           const data = await response.json()
           console.log('About data received:', data)
+          console.log('About data content:', data.content)
+          console.log('About data profileImage:', data.profileImage)
+          console.log('About data title:', data.title)
           setAboutData(data)
         } else {
           console.error('About API error:', response.status, response.statusText)
@@ -97,13 +100,19 @@ export default function About() {
                 style={{ borderColor: "#F4B400" }}
               />
               <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-xl hover:scale-105 transition-transform duration-300">
-                <Image
-                  src={aboutData.profileImage}
-                  alt="Hussam Awa"
-                  width={256}
-                  height={256}
-                  className="w-full h-full object-cover"
-                />
+                {aboutData.profileImage ? (
+                  <Image
+                    src={aboutData.profileImage}
+                    alt="Hussam Awa"
+                    width={256}
+                    height={256}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">HA</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -119,8 +128,10 @@ export default function About() {
               <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
                 {loading ? (
                   <p className="text-gray-400">Loading...</p>
-                ) : (
+                ) : aboutData.content ? (
                   <p className="whitespace-pre-wrap">{aboutData.content}</p>
+                ) : (
+                  <p className="text-gray-500 italic">No content available</p>
                 )}
               </div>
             </div>
