@@ -20,6 +20,14 @@ export async function POST(request: NextRequest) {
     const heroData = await request.json();
     console.log('Received hero data:', heroData);
     
+    // Validate required fields
+    if (!heroData.name || !heroData.titles || !heroData.description) {
+      return NextResponse.json({ 
+        error: 'Missing required fields',
+        details: 'Name, titles, and description are required'
+      }, { status: 400 });
+    }
+    
     const data = await readData();
     console.log('Current data before update:', data.hero);
     
@@ -36,13 +44,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ 
       success: true, 
       data: heroData,
-      message: 'Hero data updated successfully' 
+      message: 'Hero data updated successfully',
+      environment: process.env.NODE_ENV
     }, { status: 200 });
   } catch (error) {
     console.error('Error updating hero data:', error);
     return NextResponse.json({ 
       error: 'Failed to update hero data',
-      details: error instanceof Error ? error.message : 'Unknown error'
+      details: error instanceof Error ? error.message : 'Unknown error',
+      environment: process.env.NODE_ENV
     }, { status: 500 });
   }
 }

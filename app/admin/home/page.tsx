@@ -116,13 +116,13 @@ export default function HomeAdminPage() {
       if (response.ok) {
         const result = await response.json();
         console.log('API response data:', result);
-        alert('Hero section updated successfully!');
+        alert('✅ Hero section updated successfully!');
         setSelectedFile(null);
         fetchHeroData();
       } else {
         const errorData = await response.json();
         console.error('API error response:', errorData);
-        alert('Failed to update hero section. Please try again.');
+        alert(`❌ Failed to update hero section: ${errorData.error || 'Unknown error'}`);
       }
     } catch (error) {
       console.error('Failed to update hero data:', error);

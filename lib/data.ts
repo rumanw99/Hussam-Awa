@@ -3,34 +3,52 @@ import path from 'path';
 
 const dataPath = path.join(process.cwd(), 'data.json');
 
-// For now, always use local file storage
-const useLocalStorage = true;
+// Check if we're in production (Vercel)
+const isProduction = process.env.NODE_ENV === 'production';
+
+// In-memory storage for production (Vercel)
+let memoryData: any = null;
 
 export async function readData() {
-  if (useLocalStorage) {
-    // Use local file storage
-    try {
+  try {
+    if (isProduction) {
+      // In production, use in-memory storage or default data
+      if (memoryData) {
+        console.log('Production mode: returning memory data');
+        return memoryData;
+      } else {
+        console.log('Production mode: returning default data');
+        return getDefaultData();
+      }
+    } else {
+      // In development, read from local file
       const data = fs.readFileSync(dataPath, 'utf8');
       return JSON.parse(data);
-    } catch (error) {
-      console.error('Error reading local data file:', error);
-      return getDefaultData();
     }
+  } catch (error) {
+    console.error('Error reading data:', error);
+    return getDefaultData();
   }
 }
 
 export async function writeData(data: any) {
-  if (useLocalStorage) {
-    // Use local file storage
-    try {
+  try {
+    if (isProduction) {
+      // In production, store in memory
+      memoryData = data;
+      console.log('Production mode: data stored in memory:', JSON.stringify(data, null, 2));
+      console.log('✅ Data saved to memory (production mode)');
+      return;
+    } else {
+      // In development, write to local file
       console.log('Writing data to file:', dataPath);
       console.log('Data to write:', JSON.stringify(data, null, 2));
       fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
       console.log('✅ Data saved to local file successfully');
-    } catch (error) {
-      console.error('Error writing to local file:', error);
-      throw error;
     }
+  } catch (error) {
+    console.error('Error writing data:', error);
+    throw error;
   }
 }
 
