@@ -43,22 +43,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             const isActive = pathname === item.href;
             return (
               <li key={item.name}>
-                <a
-                  href={item.href}
-                  className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
+                <button
+                  className={`flex items-center px-4 py-2 rounded-lg transition-colors w-full text-left ${
                     isActive
                       ? 'bg-[#F4B400] text-[#1A4DA1]'
                       : 'hover:bg-[#F4B400] hover:text-[#1A4DA1]'
                   }`}
-                  onClick={(e) => {
-                    e.preventDefault();
+                  onClick={() => {
                     router.push(item.href);
                     setSidebarOpen(false);
                   }}
                 >
                   <item.icon className="w-5 h-5 mr-3" />
                   {item.name}
-                </a>
+                </button>
               </li>
             );
           })}

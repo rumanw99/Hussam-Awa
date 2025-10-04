@@ -8,10 +8,31 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: [
-      'hebbkx1anhila5yf.public.blob.vercel-storage.com',
-      'images.unsplash.com',
-      'storage.googleapis.com'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'hebbkx1anhila5yf.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
   experimental: {

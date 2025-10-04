@@ -1,10 +1,27 @@
 import { storage } from './storage';
 import { database } from './database';
 
+// Check if we're in production and have KV available
+const isProduction = process.env.NODE_ENV === 'production';
+const hasKV = process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN;
+
 export async function readData() {
   try {
+    // In production with KV, try KV first
+    if (isProduction && hasKV) {
+      try {
+        const { readData: readKVData } = await import('./data-kv');
+        const data = await readKVData();
+        console.log('Data loaded from KV:', data);
+        return data;
+      } catch (kvError) {
+        console.log('KV not available, falling back to storage:', kvError);
+      }
+    }
+    
+    // Fallback to storage
     const data = await storage.getData();
-    console.log('Data loaded:', data);
+    console.log('Data loaded from storage:', data);
     return data;
   } catch (error) {
     console.error('Error reading data:', error);
@@ -14,7 +31,18 @@ export async function readData() {
 
 export async function writeData(data: any) {
   try {
-    // Save to storage (file system)
+    // In production with KV, save to KV first
+    if (isProduction && hasKV) {
+      try {
+        const { writeData: writeKVData } = await import('./data-kv');
+        await writeKVData(data);
+        console.log('✅ Data saved to KV storage');
+      } catch (kvError) {
+        console.log('KV save failed, falling back to storage:', kvError);
+      }
+    }
+    
+    // Always save to storage (file system) as backup
     await storage.setData(data);
     
     // Also save to database (persistent cache)
