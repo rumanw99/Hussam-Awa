@@ -156,16 +156,23 @@ export default function Portfolio() {
   useEffect(() => {
     const fetchPortfolioData = async () => {
       try {
+        console.log('Portfolio component - Fetching photos...')
         // Fetch photos from API
         const photosResponse = await fetch('/api/photos')
+        console.log('Portfolio component - Photos response status:', photosResponse.status)
         const photosData = photosResponse.ok ? await photosResponse.json() : []
+        console.log('Portfolio component - Photos data received:', photosData.length)
 
+        console.log('Portfolio component - Fetching videos...')
         // Fetch videos from API
         const videosResponse = await fetch('/api/videos')
+        console.log('Portfolio component - Videos response status:', videosResponse.status)
         const videosData = videosResponse.ok ? await videosResponse.json() : []
+        console.log('Portfolio component - Videos data received:', videosData.length)
 
         // Use photos from API only
         setPhotos(photosData)
+        console.log('Portfolio component - Setting photos count:', photosData.length)
 
         // Use videos from API only (convert format)
         const formattedVideos = videosData.map((v: any) => ({
@@ -174,11 +181,13 @@ export default function Portfolio() {
           title: v.title,
           description: v.description
         }))
+        console.log('Portfolio component - Formatted videos:', formattedVideos.length)
         setVideos(formattedVideos)
 
       } catch (error) {
-        console.error('Failed to fetch portfolio data:', error)
+        console.error('Portfolio component - Failed to fetch portfolio data:', error)
       } finally {
+        console.log('Portfolio component - Setting loading to false')
         setLoading(false)
       }
     }

@@ -3,9 +3,34 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
+    console.log('Videos API - Starting request...');
     const data = await readData();
-    return NextResponse.json(data.videos);
+    console.log('Videos API - Full data loaded:', !!data);
+    console.log('Videos API - Videos data exists:', !!data.videos);
+    console.log('Videos API - Videos count:', data.videos?.length || 0);
+    
+    // Default videos if none exist
+    const defaultVideos = [
+      {
+        title: "Portfolio Video 1",
+        description: "Professional video showcasing my work",
+        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp-Video-2025-09-30-at-12.23.14-AM.mp4",
+        thumbnail: "/video-production-thumbnail.png"
+      },
+      {
+        title: "Corporate Video",
+        description: "High-quality corporate video production",
+        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp-Video-2025-09-30-at-12.23.14-AM.mp4",
+        thumbnail: "/video-production-thumbnail.png"
+      }
+    ];
+    
+    // Use default videos if none exist
+    const videos = data.videos && data.videos.length > 0 ? data.videos : defaultVideos;
+    console.log('Videos API - Returning videos count:', videos.length);
+    return NextResponse.json(videos);
   } catch (error) {
+    console.error('Videos API - Error:', error);
     return NextResponse.json({ error: 'Failed to read videos' }, { status: 500 });
   }
 }
