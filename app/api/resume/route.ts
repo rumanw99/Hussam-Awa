@@ -25,35 +25,51 @@ export async function GET(request: NextRequest) {
     const defaultResume = {
       experience: [
         {
-          position: "Executive Producer",
-          company: "Media Production Company",
-          startDate: "2020",
-          endDate: "Present",
-          description: "Leading production teams and managing high-profile media projects. Overseeing creative direction and ensuring quality deliverables."
-        },
-        {
-          position: "HR Manager",
-          company: "Corporate Solutions Ltd",
-          startDate: "2018",
-          endDate: "2020",
-          description: "Managed human resources operations, talent acquisition, and employee development programs. Implemented performance management systems."
-        },
-        {
           position: "Sales Manager",
-          company: "Business Development Corp",
-          startDate: "2015",
-          endDate: "2018",
-          description: "Led sales teams to exceed revenue targets. Developed strategic partnerships and managed key client relationships."
+          company: "iPro Group General Trading",
+          startDate: "2021",
+          endDate: "Present",
+          description: "Achieving growth and hitting sales targets by successfully managing the sales team. Designing and implementing strategic sales plans that expand company's customer base and ensure strong presence. Managing recruiting, objectives setting, coaching and performance monitoring of sales representatives."
+        },
+        {
+          position: "PR & Sales Manager",
+          company: "SAMIT Event Management",
+          startDate: "Aug 2022",
+          endDate: "Present",
+          description: "Orchestrated site selection for photography, securing permits through effective collaboration. Led cross-functional production team members to optimize workflow and meet project goals. Spearheaded identification and scheduling of actors and singers, ensuring cohesive production process."
+        },
+        {
+          position: "Events Manager",
+          company: "iPro General Trading FZLLC",
+          startDate: "Jan 2019",
+          endDate: "Aug 2023",
+          description: "Developed and executed comprehensive sales and marketing plans for high-profile events. Established effective communication channels with various media outlets, enhancing event visibility. Successfully coordinated charity concerts, managing contracts and logistical details."
+        },
+        {
+          position: "Executive Producer",
+          company: "ProX Production FZLLC / Media Zone Authority",
+          startDate: "Apr 2013",
+          endDate: "Dec 2019",
+          description: "Led job analysis project to evaluate and redesign current positions. Designed and implemented new performance management system to build performance culture and boost productivity. Supervised production of films, determined work schedules and correct workflow. Coordinated with television stations."
+        },
+        {
+          position: "HR and Admin Manager",
+          company: "Prox Production FZ LLC",
+          startDate: "2017",
+          endDate: "2021",
+          description: "Led job analysis project to evaluate and redesign current positions. Designed and implemented new performance management system. Designed training and development system program, including employee training and new employee orientation program."
         }
       ],
-      aboutMe: "Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai's dynamic business environment.",
+      aboutMe: "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. I have extensive experience in developing and executing marketing and sales strategies, positioning, research, and branding for various production companies and Media Zone Authority 'towfour54'.",
       skills: [
-        { name: "Project Management", level: 95 },
+        { name: "Strategic Planning", level: 95 },
         { name: "Team Leadership", level: 90 },
         { name: "Media Production", level: 95 },
-        { name: "Marketing Strategy", level: 85 },
+        { name: "Marketing Strategy", level: 90 },
         { name: "Sales Management", level: 88 },
-        { name: "HR Operations", level: 82 }
+        { name: "HR Operations", level: 85 },
+        { name: "Event Management", level: 90 },
+        { name: "Project Coordination", level: 92 }
       ]
     };
 

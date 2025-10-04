@@ -31,7 +31,7 @@ function getDefaultData() {
     hero: {
       name: "Hussam Awa",
       titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
-      description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
+      description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership. Executive Producer, HR, Sales Manager and Marketing Manager with extensive experience in Dubai's dynamic media industry.",
       profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
     },
     photos: [
@@ -65,7 +65,7 @@ function getDefaultData() {
     about: {
       title: "Golden Visa Holder",
       profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg",
-      content: "Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai's dynamic business environment.",
+      content: "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. I have extensive experience in developing and executing marketing and sales strategies, positioning, research, and branding for various production companies and Media Zone Authority 'towfour54'. I specialize in producing multimedia content for TV, web, and social media platforms, including documentaries, commercials, and corporate videos. I have successfully managed sales and business development activities, generating over $5 million in revenue and securing long-term partnerships with key clients. I have led and mentored teams of up to 20 creative professionals, enhancing employee relations and performance. I hold a golden visa as a multimedia producer and am eager to contribute to the success of organizations while growing professionally.",
       stats: [
         { icon: "Briefcase", value: "12+", label: "Years Experience" },
         { icon: "DollarSign", value: "$5M+", label: "Revenue Generated" },
@@ -76,19 +76,51 @@ function getDefaultData() {
     resume: {
       experience: [
         {
-          title: "Executive Producer",
-          company: "Media Production Company",
+          title: "Sales Manager",
+          company: "iPro Group General Trading",
           location: "Dubai, UAE",
-          period: "2020 - Present",
-          description: "Leading production teams and managing high-profile media projects."
+          period: "2021 - Present",
+          description: "Achieving growth and hitting sales targets by successfully managing the sales team. Designing and implementing strategic sales plans that expand company's customer base and ensure strong presence. Managing recruiting, objectives setting, coaching and performance monitoring of sales representatives."
+        },
+        {
+          title: "PR & Sales Manager",
+          company: "SAMIT Event Management",
+          location: "Dubai, UAE",
+          period: "Aug 2022 - Present",
+          description: "Orchestrated site selection for photography, securing permits through effective collaboration. Led cross-functional production team members to optimize workflow and meet project goals. Spearheaded identification and scheduling of actors and singers, ensuring cohesive production process."
+        },
+        {
+          title: "Events Manager",
+          company: "iPro General Trading FZLLC",
+          location: "Dubai, UAE",
+          period: "Jan 2019 - Aug 2023",
+          description: "Developed and executed comprehensive sales and marketing plans for high-profile events. Established effective communication channels with various media outlets, enhancing event visibility. Successfully coordinated charity concerts, managing contracts and logistical details."
+        },
+        {
+          title: "Executive Producer",
+          company: "ProX Production FZLLC / Media Zone Authority",
+          location: "Abu Dhabi, UAE",
+          period: "Apr 2013 - Dec 2019",
+          description: "Led job analysis project to evaluate and redesign current positions. Designed and implemented new performance management system to build performance culture and boost productivity. Supervised production of films, determined work schedules and correct workflow. Coordinated with television stations."
+        },
+        {
+          title: "HR and Admin Manager",
+          company: "Prox Production FZ LLC",
+          location: "Abu Dhabi, UAE",
+          period: "2017 - 2021",
+          description: "Led job analysis project to evaluate and redesign current positions. Designed and implemented new performance management system. Designed training and development system program, including employee training and new employee orientation program."
         }
       ],
-      aboutMe: "Experienced professional with a proven track record in media production, marketing, and team leadership.",
+      aboutMe: "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. I have extensive experience in developing and executing marketing and sales strategies, positioning, research, and branding for various production companies and Media Zone Authority 'towfour54'.",
       skills: [
-        { name: "Project Management", level: 95 },
+        { name: "Strategic Planning", level: 95 },
         { name: "Team Leadership", level: 90 },
         { name: "Media Production", level: 95 },
-        { name: "Marketing Strategy", level: 85 }
+        { name: "Marketing Strategy", level: 90 },
+        { name: "Sales Management", level: 88 },
+        { name: "HR Operations", level: 85 },
+        { name: "Event Management", level: 90 },
+        { name: "Project Coordination", level: 92 }
       ]
     },
     testimonials: [
@@ -101,10 +133,10 @@ function getDefaultData() {
       }
     ],
     contact: {
-      email: "hussam@example.com",
-      phone: "+971 50 123 4567",
-      location: "Dubai, UAE",
-      linkedin: "https://linkedin.com/in/hussam-awa",
+      email: "hussam.awa@icloud.com",
+      phone: "+971 50 1883240",
+      location: "Dubai Sports City, UAE",
+      linkedin: "https://www.linkedin.com/in/hussam-awa-aaa47998/",
       socialLinks: {
         twitter: "",
         instagram: "",
@@ -113,10 +145,10 @@ function getDefaultData() {
     },
     settings: {
       name: "Hussam Awa",
-      title: "Executive Producer",
-      email: "hussam@example.com",
-      phone: "+971 50 123 4567",
-      linkedin: "https://linkedin.com/in/hussam-awa",
+      title: "Executive Producer, HR, Sales & Marketing Manager",
+      email: "hussam.awa@icloud.com",
+      phone: "+971 50 1883240",
+      linkedin: "https://www.linkedin.com/in/hussam-awa-aaa47998/",
       profilePhoto: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
     },
     blog: []
