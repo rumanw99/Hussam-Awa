@@ -15,29 +15,38 @@ export default function Experience() {
         console.log('Experience component - Fetching data...')
         const response = await fetch('/api/resume')
         console.log('Experience component - Response status:', response.status)
+        console.log('Experience component - Response ok:', response.ok)
         
         if (response.ok) {
           const data = await response.json()
           console.log('Experience component - Received data:', data)
           console.log('Experience component - Experience data:', data.experience)
+          console.log('Experience component - Experience length:', data.experience?.length || 0)
           
           // Use experiences from API with fallback
           const experienceData = data.experience || []
-          const formattedExperiences = experienceData.map((exp: any) => ({
-            title: exp.position || exp.title || 'Position',
-            company: exp.company || 'Company',
-            period: `${exp.startDate || 'Start'} – ${exp.endDate || 'Present'}`,
-            responsibilities: exp.description ? exp.description.split('\n').filter((line: string) => line.trim()) : ['No description available']
-          }))
+          console.log('Experience component - Experience data after fallback:', experienceData)
+          
+          const formattedExperiences = experienceData.map((exp: any) => {
+            console.log('Experience component - Processing experience:', exp)
+            return {
+              title: exp.position || exp.title || 'Position',
+              company: exp.company || 'Company',
+              period: `${exp.startDate || 'Start'} – ${exp.endDate || 'Present'}`,
+              responsibilities: exp.description ? exp.description.split('\n').filter((line: string) => line.trim()) : ['No description available']
+            }
+          })
 
           console.log('Experience component - Formatted experiences:', formattedExperiences)
+          console.log('Experience component - Setting experiences count:', formattedExperiences.length)
           setExperiences(formattedExperiences)
         } else {
-          console.error('Experience component - API error:', response.status)
+          console.error('Experience component - API error:', response.status, response.statusText)
         }
       } catch (error) {
         console.error('Experience component - Failed to fetch experience:', error)
       } finally {
+        console.log('Experience component - Setting loading to false')
         setLoading(false)
       }
     }
