@@ -22,10 +22,12 @@ export default function Testimonials() {
         if (response.ok) {
           const data = await response.json()
           console.log('Testimonials component - Received data:', data)
+          console.log('Testimonials component - Data length:', data.length)
+          console.log('Testimonials component - Setting testimonials count:', data.length)
           
           setTestimonials(data)
         } else {
-          console.error('Testimonials component - API error:', response.status)
+          console.error('Testimonials component - API error:', response.status, response.statusText)
         }
       } catch (error) {
         console.error('Testimonials component - Failed to fetch testimonials:', error)
