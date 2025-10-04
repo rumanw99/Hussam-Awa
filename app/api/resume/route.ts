@@ -21,8 +21,45 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(data.resume[section]);
     }
 
-    console.log('Resume API - Returning full resume data:', data.resume);
-    return NextResponse.json(data.resume);
+    // If no resume data, return default data
+    const defaultResume = {
+      experience: [
+        {
+          position: "Executive Producer",
+          company: "Media Production Company",
+          startDate: "2020",
+          endDate: "Present",
+          description: "Leading production teams and managing high-profile media projects. Overseeing creative direction and ensuring quality deliverables."
+        },
+        {
+          position: "HR Manager",
+          company: "Corporate Solutions Ltd",
+          startDate: "2018",
+          endDate: "2020",
+          description: "Managed human resources operations, talent acquisition, and employee development programs. Implemented performance management systems."
+        },
+        {
+          position: "Sales Manager",
+          company: "Business Development Corp",
+          startDate: "2015",
+          endDate: "2018",
+          description: "Led sales teams to exceed revenue targets. Developed strategic partnerships and managed key client relationships."
+        }
+      ],
+      aboutMe: "Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai's dynamic business environment.",
+      skills: [
+        { name: "Project Management", level: 95 },
+        { name: "Team Leadership", level: 90 },
+        { name: "Media Production", level: 95 },
+        { name: "Marketing Strategy", level: 85 },
+        { name: "Sales Management", level: 88 },
+        { name: "HR Operations", level: 82 }
+      ]
+    };
+
+    const resumeData = data.resume || defaultResume;
+    console.log('Resume API - Returning resume data:', resumeData);
+    return NextResponse.json(resumeData);
   } catch (error) {
     console.error('Resume API - Error:', error);
     return NextResponse.json({ error: 'Failed to read resume' }, { status: 500 });

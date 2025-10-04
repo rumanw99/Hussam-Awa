@@ -21,12 +21,13 @@ export default function Experience() {
           console.log('Experience component - Received data:', data)
           console.log('Experience component - Experience data:', data.experience)
           
-          // Use experiences from API only
-          const formattedExperiences = data.experience.map((exp: any) => ({
-            title: exp.position,
-            company: exp.company,
-            period: `${exp.startDate} – ${exp.endDate || 'Present'}`,
-            responsibilities: exp.description.split('\n').filter((line: string) => line.trim())
+          // Use experiences from API with fallback
+          const experienceData = data.experience || []
+          const formattedExperiences = experienceData.map((exp: any) => ({
+            title: exp.position || exp.title || 'Position',
+            company: exp.company || 'Company',
+            period: `${exp.startDate || 'Start'} – ${exp.endDate || 'Present'}`,
+            responsibilities: exp.description ? exp.description.split('\n').filter((line: string) => line.trim()) : ['No description available']
           }))
 
           console.log('Experience component - Formatted experiences:', formattedExperiences)
@@ -167,7 +168,7 @@ export default function Experience() {
                   <Card className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
                     <CardContent className="p-6">
                       <ul className="space-y-2">
-                        {exp.responsibilities.map((resp, idx) => (
+                        {exp.responsibilities.map((resp: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-2">
                             <Check className="text-yellow-400 mt-1 w-4 h-4 flex-shrink-0" />
                             <span className="text-gray-700 dark:text-gray-300">{resp}</span>
