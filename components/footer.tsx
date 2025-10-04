@@ -1,7 +1,8 @@
 "use client"
 
-import { Facebook, Twitter, Linkedin, Instagram, ArrowUp, Star } from "lucide-react"
+import { Facebook, Twitter, Linkedin, Instagram, ArrowUp, Star, Mail, Phone, MapPin, Globe, Heart } from "lucide-react"
 import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false)
@@ -47,13 +48,65 @@ export default function Footer() {
   }
 
   return (
-    <footer id="footer" className="relative text-white py-16 overflow-hidden bg-gradient-to-r from-blue-600 to-blue-800 dark:from-gray-800 dark:to-gray-900">
-      {/* Magic Sparkle Elements */}
+    <footer id="footer" className="relative text-white py-20 overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-gray-800 dark:via-gray-700 dark:to-gray-900">
+      {/* Enhanced Magic Sparkle Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <Star className="absolute top-10 left-10 w-4 h-4 text-yellow-300 animate-pulse opacity-70" />
-        <Star className="absolute top-20 right-20 w-3 h-3 text-yellow-200 animate-bounce opacity-50" />
-        <Star className="absolute bottom-20 left-20 w-5 h-5 text-yellow-400 animate-pulse opacity-60" />
-        <Star className="absolute bottom-10 right-10 w-2 h-2 text-yellow-300 animate-ping opacity-80" />
+        <motion.div
+          className="absolute top-10 left-10"
+          animate={{ 
+            rotate: 360,
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ 
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Star className="w-4 h-4 text-yellow-300" />
+        </motion.div>
+        <motion.div
+          className="absolute top-20 right-20"
+          animate={{ 
+            y: [-5, 5, -5],
+            rotate: [0, 180, 360]
+          }}
+          transition={{ 
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Star className="w-3 h-3 text-yellow-200" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-20 left-20"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.6, 1, 0.6]
+          }}
+          transition={{ 
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Star className="w-5 h-5 text-yellow-400" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-10 right-10"
+          animate={{ 
+            scale: [1, 1.5, 1],
+            opacity: [0.8, 0.3, 0.8]
+          }}
+          transition={{ 
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Star className="w-2 h-2 text-yellow-300" />
+        </motion.div>
       </div>
 
       {/* Particle Background */}
@@ -83,76 +136,227 @@ export default function Footer() {
       )}
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
+        {/* Contact Info Section */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <motion.div
+            className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Mail className="w-8 h-8 mx-auto mb-3 text-yellow-400" />
+            </motion.div>
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Email</h4>
+            <p className="text-white/80 text-sm">hussam.awa@icloud.com</p>
+          </motion.div>
+
+          <motion.div
+            className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Phone className="w-8 h-8 mx-auto mb-3 text-yellow-400" />
+            </motion.div>
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Phone</h4>
+            <p className="text-white/80 text-sm">+971 50 1883240</p>
+          </motion.div>
+
+          <motion.div
+            className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.6 }}
+            >
+              <MapPin className="w-8 h-8 mx-auto mb-3 text-yellow-400" />
+            </motion.div>
+            <h4 className="text-lg font-bold mb-2 text-yellow-400">Location</h4>
+            <p className="text-white/80 text-sm">Dubai Sports City, UAE</p>
+          </motion.div>
+        </motion.div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
-          <div className="text-center md:text-left">
-            <a href="#home" className="text-3xl font-bold inline-block mb-3 hover:scale-105 transition-transform duration-300">
+          <motion.div
+            className="text-center md:text-left"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <motion.a
+              href="#home"
+              className="text-4xl font-bold inline-block mb-4"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
               <span className="text-white">Hussam</span>
-              <span style={{ color: "#F4B400" }}>Awa</span>
-            </a>
-            <p className="text-white/80 mb-4">Executive Producer | Marketing & Sales Leader</p>
-            <p className="text-white/70 text-sm italic">"Creating magic through media and innovation"</p>
-          </div>
+              <span className="text-yellow-400">Awa</span>
+            </motion.a>
+            <motion.p
+              className="text-white/80 mb-4 text-lg"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              Executive Producer | Marketing & Sales Leader
+            </motion.p>
+            <motion.p
+              className="text-white/70 text-sm italic"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              "Creating magic through media and innovation"
+            </motion.p>
+          </motion.div>
 
           {/* Quick Links */}
-          <div className="text-center">
-            <h3 className="text-xl font-semibold mb-4" style={{ color: "#F4B400" }}>Quick Links</h3>
-            <div className="flex flex-col gap-2">
-              <a href="#home" className="text-white/80 hover:text-yellow-300 transition-colors duration-300">Home</a>
-              <a href="#about" className="text-white/80 hover:text-yellow-300 transition-colors duration-300">About</a>
-              <a href="#portfolio" className="text-white/80 hover:text-yellow-300 transition-colors duration-300">Portfolio</a>
-              <a href="#contact" className="text-white/80 hover:text-yellow-300 transition-colors duration-300">Contact</a>
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-bold mb-6 text-yellow-400">Quick Links</h3>
+            <div className="flex flex-col gap-3">
+              {['Home', 'About', 'Portfolio', 'Contact'].map((link, index) => (
+                <motion.a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  className="text-white/80 hover:text-yellow-300 transition-colors duration-300 text-lg"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 5, color: "#F4B400" }}
+                >
+                  {link}
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Social Links */}
-          <div className="text-center md:text-right">
-            <h3 className="text-xl font-semibold mb-4" style={{ color: "#F4B400" }}>Connect With Me</h3>
+          <motion.div
+            className="text-center md:text-right"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-bold mb-6 text-yellow-400">Connect With Me</h3>
             <div className="flex justify-center md:justify-end gap-4">
-              <a
-                href="#"
-                className="text-white/80 hover:text-yellow-300 transition-all duration-300 transform hover:scale-110"
-              >
-                <Facebook className="w-6 h-6" />
-              </a>
-              <a
-                href="#"
-                className="text-white/80 hover:text-yellow-300 transition-all duration-300 transform hover:scale-110"
-              >
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/hussam-awa-aaa47998/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/80 hover:text-yellow-300 transition-all duration-300 transform hover:scale-110"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
-              <a
-                href="#"
-                className="text-white/80 hover:text-yellow-300 transition-all duration-300 transform hover:scale-110"
-              >
-                <Instagram className="w-6 h-6" />
-              </a>
+              {[
+                { icon: Facebook, href: "#", label: "Facebook" },
+                { icon: Twitter, href: "#", label: "Twitter" },
+                { icon: Linkedin, href: "https://www.linkedin.com/in/hussam-awa-aaa47998/", label: "LinkedIn" },
+                { icon: Instagram, href: "#", label: "Instagram" }
+              ].map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith('http') ? "_blank" : undefined}
+                  rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                  className="text-white/80 hover:text-yellow-300 transition-all duration-300 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    scale: 1.2, 
+                    rotate: 360,
+                    backgroundColor: "rgba(244, 180, 0, 0.2)"
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <social.icon className="w-6 h-6" />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/60">
-          <p>&copy; 2025 Hussam Awa. All rights reserved. | Made with <span className="text-red-400">♥</span> and a touch of magic</p>
-        </div>
+        <motion.div
+          className="border-t border-white/20 mt-8 pt-8 text-center text-white/60"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <motion.p
+            className="text-lg"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+            viewport={{ once: true }}
+          >
+            &copy; 2025 Hussam Awa. All rights reserved. | Made with{' '}
+            <motion.span
+              className="text-yellow-400 inline-block"
+              animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 10, -10, 0]
+              }}
+              transition={{ 
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              ♥
+            </motion.span>
+            {' '}and a touch of magic
+          </motion.p>
+        </motion.div>
       </div>
 
-      {/* Back to Top Button */}
+      {/* Enhanced Back to Top Button */}
       {showBackToTop && (
-        <button
+        <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-yellow-400 text-blue-900 p-3 rounded-full shadow-lg hover:bg-yellow-300 transition-all duration-300 transform hover:scale-110 animate-bounce cursor-pointer"
+          className="fixed bottom-8 right-8 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 p-4 rounded-full shadow-2xl border-2 border-white/20 backdrop-blur-sm"
           aria-label="Back to top"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          whileHover={{ 
+            scale: 1.1,
+            rotate: 360,
+            boxShadow: "0 10px 30px rgba(244, 180, 0, 0.4)"
+          }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ duration: 0.3 }}
         >
-          <ArrowUp className="w-5 h-5" />
-        </button>
+          <motion.div
+            animate={{ y: [-2, 2, -2] }}
+            transition={{ 
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <ArrowUp className="w-6 h-6" />
+          </motion.div>
+        </motion.button>
       )}
     </footer>
   )
