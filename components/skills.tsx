@@ -61,6 +61,8 @@ export default function Skills() {
     )
   }
 
+  console.log('Skills component - Final render state:', { loading, skills: skills.length })
+
   // Show section even if no data
   if (skills.length === 0) {
     return (

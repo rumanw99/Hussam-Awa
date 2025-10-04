@@ -54,6 +54,8 @@ export default function Experience() {
     )
   }
 
+  console.log('Experience component - Final render state:', { loading, experiences: experiences.length })
+
   // Show section even if no data
   if (experiences.length === 0) {
     return (

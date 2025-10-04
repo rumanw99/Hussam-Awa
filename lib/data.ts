@@ -17,8 +17,17 @@ export async function readData() {
         console.log('Production mode: returning memory data');
         return memoryData;
       } else {
-        console.log('Production mode: returning default data');
-        return getDefaultData();
+        console.log('Production mode: returning default data with real content');
+        // Return the actual data from data.json instead of default
+        try {
+          const data = fs.readFileSync(dataPath, 'utf8');
+          const parsedData = JSON.parse(data);
+          console.log('Production mode: loaded data from file:', parsedData);
+          return parsedData;
+        } catch (fileError) {
+          console.log('Production mode: file read failed, using default data');
+          return getDefaultData();
+        }
       }
     } else {
       // In development, read from local file

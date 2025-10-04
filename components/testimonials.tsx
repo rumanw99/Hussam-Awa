@@ -47,6 +47,8 @@ export default function Testimonials() {
     )
   }
 
+  console.log('Testimonials component - Final render state:', { loading, testimonials: testimonials.length })
+
   if (testimonials.length === 0) {
     return (
       <section id="testimonials" className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
