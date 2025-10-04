@@ -37,12 +37,14 @@ export default function Navigation() {
 
     // Throttled scroll handler for performance
     const throttledScroll = throttle(() => {
-      setIsScrolled(window.scrollY > 50)
-      setShowBackToTop(window.scrollY > 300)
+      const scrollY = window.scrollY
+      const isScrolledNow = scrollY > 50
+      setIsScrolled(isScrolledNow)
+      setShowBackToTop(scrollY > 300)
 
       // Calculate scroll progress
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight
-      const progress = (window.scrollY / totalHeight) * 100
+      const progress = (scrollY / totalHeight) * 100
       setScrollProgress(progress)
     }, 16) // ~60fps
 
@@ -56,7 +58,10 @@ export default function Navigation() {
           }
         })
       },
-      { threshold: 0.3, rootMargin: "-80px 0px -50% 0px" }
+      { 
+        threshold: 0.1, 
+        rootMargin: "-100px 0px -50% 0px" 
+      }
     )
 
     sections.forEach((id) => {
@@ -325,9 +330,7 @@ export default function Navigation() {
                   }}
                   className={`relative px-4 py-2 font-medium transition-all duration-300 rounded-lg group ${
                     activeSection === link.id
-                      ? isScrolled
-                        ? "text-yellow-400 dark:text-yellow-400"
-                        : "text-yellow-400 dark:text-yellow-400"
+                      ? "text-yellow-400 dark:text-yellow-400"
                       : isScrolled
                         ? "text-blue-600 dark:text-blue-400 hover:text-yellow-400 dark:hover:text-yellow-400"
                         : "text-white/90 dark:text-gray-200 hover:text-yellow-400 dark:hover:text-yellow-400"

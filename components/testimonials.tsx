@@ -41,7 +41,7 @@ export default function Testimonials() {
 
   if (loading) {
     return (
-      <section id="testimonials" className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
+      <section className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center text-blue-600 dark:text-blue-400">Loading testimonials...</div>
         </div>
@@ -53,7 +53,7 @@ export default function Testimonials() {
 
   if (testimonials.length === 0) {
     return (
-      <section id="testimonials" className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
+      <section className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
         <div className="max-w-7xl mx-auto px-6">
           <motion.h2
             className="text-4xl md:text-5xl font-bold mb-4 text-blue-600 dark:text-blue-400"
