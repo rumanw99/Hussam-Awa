@@ -6,8 +6,8 @@ export async function GET() {
     const data = await readData();
     return NextResponse.json(data.about || {
       title: "Golden Visa Holder",
-      profileImage: "",
-      content: "",
+      profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg",
+      content: "Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai's dynamic business environment. I specialize in creating compelling visual content and leading high-performing teams to deliver exceptional results.",
       stats: [
         { icon: "Briefcase", value: "12+", label: "Years Experience" },
         { icon: "DollarSign", value: "$5M+", label: "Revenue Generated" },

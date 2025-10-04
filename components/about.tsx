@@ -2,7 +2,7 @@
 
 import { Award, DollarSign, Users, Briefcase } from "lucide-react"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
-
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 
 export default function About() {
@@ -92,9 +92,11 @@ export default function About() {
                 style={{ borderColor: "#F4B400" }}
               />
               <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-xl hover:scale-105 transition-transform duration-300">
-                <img
+                <Image
                   src={aboutData.profileImage}
                   alt="Hussam Awa"
+                  width={256}
+                  height={256}
                   className="w-full h-full object-cover"
                 />
               </div>
