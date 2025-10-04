@@ -3,8 +3,11 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
+    console.log('About API - Starting request...');
     const data = await readData();
-    return NextResponse.json(data.about || {
+    console.log('About API - Data loaded:', data);
+    
+    const aboutData = data.about || {
       title: "Golden Visa Holder",
       profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg",
       content: "Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai's dynamic business environment. I specialize in creating compelling visual content and leading high-performing teams to deliver exceptional results.",
@@ -14,8 +17,12 @@ export async function GET() {
         { icon: "Users", value: "20+", label: "Team Members Led" },
         { icon: "Award", value: "100+", label: "Projects Completed" }
       ]
-    });
+    };
+    
+    console.log('About API - Returning data:', aboutData);
+    return NextResponse.json(aboutData);
   } catch (error) {
+    console.error('About API - Error:', error);
     return NextResponse.json({ error: 'Failed to read about data' }, { status: 500 });
   }
 }
