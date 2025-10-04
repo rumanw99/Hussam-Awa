@@ -3,10 +3,11 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronUp, Moon, Sun } from "lucide-react"
+import { Menu, X, ChevronUp, Moon, Sun, Sparkles, Star } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 const throttle = (func: Function, delay: number) => {
   let timeoutId: NodeJS.Timeout | undefined
@@ -142,96 +143,162 @@ export default function Navigation() {
 
   return (
     <>
-      {/* Scroll Progress Bar */}
-      <div className={`fixed top-0 left-0 right-0 z-50 h-1 bg-[#F4B400]/20 transition-all duration-300 ${
-        isModalOpen ? "opacity-0 pointer-events-none" : "opacity-100"
-      }`}>
-        <div
-          className="h-full bg-[#F4B400] transition-all duration-300 ease-out"
-          style={{ width: `${scrollProgress}%` }}
+      {/* Enhanced Scroll Progress Bar */}
+      <motion.div
+        className={`fixed top-0 left-0 right-0 z-50 h-1 transition-all duration-300 ${
+          isModalOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="h-full bg-gradient-to-r from-blue-500/20 to-yellow-400/20" />
+        <motion.div
+          className="h-full bg-gradient-to-r from-blue-500 to-yellow-400 shadow-lg"
+          initial={{ width: 0 }}
+          animate={{ width: `${scrollProgress}%` }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
         />
-      </div>
+      </motion.div>
 
-      <nav
+      <motion.nav
         className={`fixed top-1 left-0 right-0 z-50 transition-all duration-700 ${
           isLoaded && !isModalOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         } ${
           isScrolled
-            ? "bg-white/98 dark:bg-gray-900/98 backdrop-blur-md shadow-lg border-b border-[#F4B400]/20 dark:border-yellow-400/20"
-            : "bg-gradient-to-b from-[#1A4DA1]/95 to-transparent dark:from-gray-900/95 dark:to-transparent backdrop-blur-sm"
+            ? "bg-white/98 dark:bg-gray-900/98 backdrop-blur-md shadow-lg border-b border-yellow-400/20 dark:border-yellow-400/20"
+            : "bg-gradient-to-b from-blue-600/95 to-transparent dark:from-gray-900/95 dark:to-transparent backdrop-blur-sm"
         }`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <a
+            <motion.a
               href="#home"
               onClick={(e) => handleNavClick(e, "#home")}
               className="group relative text-3xl font-bold tracking-tight transition-all duration-300 hover:scale-105 hover:drop-shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <span className={`transition-colors duration-300 ${isScrolled ? "text-[#1A4DA1] dark:text-blue-400" : "text-white dark:text-gray-100"}`}>
+              <motion.span
+                className={`transition-colors duration-300 ${isScrolled ? "text-blue-600 dark:text-blue-400" : "text-white dark:text-gray-100"}`}
+                whileHover={{ color: "#F4B400" }}
+                transition={{ duration: 0.3 }}
+              >
                 Hussam
-              </span>
-              <span className="text-[#F4B400] ml-1 relative">
+              </motion.span>
+              <motion.span
+                className="text-yellow-400 ml-1 relative"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              >
                 Awa
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F4B400] transition-all duration-300 group-hover:w-full shadow-[0_0_8px_rgba(244,180,0,0.6)]"></span>
-              </span>
-              <div className="absolute inset-0 bg-[#F4B400]/10 rounded-lg scale-0 group-hover:scale-110 transition-transform duration-300 -z-10 blur-sm"></div>
-            </a>
+                <motion.span
+                  className="absolute -bottom-1 left-0 h-0.5 bg-yellow-400 shadow-[0_0_8px_rgba(244,180,0,0.6)]"
+                  initial={{ width: 0 }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.span>
+              <motion.div
+                className="absolute inset-0 bg-yellow-400/10 rounded-lg -z-10 blur-sm"
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
 
             <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <a
+              {navLinks.map((link, index) => (
+                <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`relative px-4 py-2 font-medium transition-all duration-300 rounded-lg group ${
                     activeSection === link.id
                       ? isScrolled
-                        ? "text-[#F4B400] dark:text-yellow-400"
-                        : "text-[#F4B400] dark:text-yellow-400"
+                        ? "text-yellow-400 dark:text-yellow-400"
+                        : "text-yellow-400 dark:text-yellow-400"
                       : isScrolled
-                        ? "text-[#1A4DA1] dark:text-blue-400 hover:text-[#F4B400] dark:hover:text-yellow-400"
-                        : "text-white/90 dark:text-gray-200 hover:text-[#F4B400] dark:hover:text-yellow-400"
+                        ? "text-blue-600 dark:text-blue-400 hover:text-yellow-400 dark:hover:text-yellow-400"
+                        : "text-white/90 dark:text-gray-200 hover:text-yellow-400 dark:hover:text-yellow-400"
                   }`}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {link.label}
-                  <span
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#F4B400] transition-all duration-500 ${
-                      activeSection === link.id ? "w-8 shadow-[0_0_8px_rgba(244,180,0,0.6)]" : "w-0 group-hover:w-8"
-                    }`}
-                  ></span>
-                  <span className="absolute inset-0 bg-[#F4B400]/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-10"></span>
-                </a>
+                  <motion.span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-yellow-400 shadow-[0_0_8px_rgba(244,180,0,0.6)]`}
+                    initial={{ width: 0 }}
+                    animate={{ 
+                      width: activeSection === link.id ? 32 : 0 
+                    }}
+                    whileHover={{ width: 32 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.span
+                    className="absolute inset-0 bg-yellow-400/10 rounded-lg -z-10"
+                    initial={{ scale: 0 }}
+                    whileHover={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.a>
               ))}
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className={`ml-4 transition-all duration-300 hover:scale-110 hover:bg-yellow-400/20 cursor-pointer ${
+                    isScrolled ? "text-blue-600" : "text-white"
+                  }`}
+                  whileHover={{ scale: 1.1, rotate: 15 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  <span className="sr-only">Toggle theme</span>
+                </Button>
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+            >
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className={`ml-4 transition-all duration-300 hover:scale-110 hover:bg-[#F4B400]/20 cursor-pointer ${
-                  isScrolled ? "text-[#1A4DA1]" : "text-white"
+                className={`md:hidden transition-all duration-300 hover:scale-110 hover:bg-yellow-400/20 ${
+                  isScrolled ? "text-blue-600" : "text-white"
                 }`}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
               >
-                <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                <span className="sr-only">Toggle theme</span>
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </motion.div>
               </Button>
-            </div>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className={`md:hidden transition-all duration-300 hover:scale-110 hover:bg-[#F4B400]/20 ${
-                isScrolled ? "text-[#1A4DA1]" : "text-white"
-              }`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            </motion.div>
           </div>
         </div>
       </nav>
 
-      <div
+      <motion.div
         className={`fixed top-0 right-0 h-full w-80 z-40 md:hidden transition-all duration-500 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
@@ -239,39 +306,92 @@ export default function Navigation() {
           background: "linear-gradient(135deg, rgba(26, 77, 161, 0.98) 0%, rgba(26, 77, 161, 0.95) 100%)",
           backdropFilter: "blur(10px)",
         }}
+        initial={{ x: "100%" }}
+        animate={{ x: isMobileMenuOpen ? 0 : "100%" }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
       >
-        <div className="flex flex-col items-start justify-center h-full gap-8 px-8 pt-20">
+        {/* Floating Stars in Mobile Menu */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${20 + i * 20}%`,
+                top: `${15 + i * 20}%`,
+              }}
+              animate={{
+                y: [-5, 5, -5],
+                rotate: [0, 180, 360],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 3 + i * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.5
+              }}
+            >
+              <Star className="w-3 h-3 text-yellow-300 opacity-60" />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-start justify-center h-full gap-8 px-8 pt-20 relative z-10">
           {navLinks.map((link, index) => (
-            <a
+            <motion.a
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className={`text-white text-2xl font-semibold transition-all duration-500 hover:text-[#F4B400] hover:translate-x-2 relative group ${
-                isMobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
-              }`}
-              style={{
-                transitionDelay: isMobileMenuOpen ? `${index * 100}ms` : "0ms",
+              className="text-white text-2xl font-semibold transition-all duration-500 hover:text-yellow-400 hover:translate-x-2 relative group"
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ 
+                x: isMobileMenuOpen ? 0 : 20, 
+                opacity: isMobileMenuOpen ? 1 : 0 
               }}
+              transition={{ 
+                duration: 0.5, 
+                delay: isMobileMenuOpen ? index * 0.1 : 0 
+              }}
+              whileHover={{ scale: 1.05, x: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F4B400] transition-all duration-300 group-hover:w-full rounded-full shadow-[0_0_6px_rgba(244,180,0,0.5)]"></span>
-            </a>
+              <motion.span
+                className="absolute -bottom-1 left-0 h-0.5 bg-yellow-400 rounded-full shadow-[0_0_6px_rgba(244,180,0,0.5)]"
+                initial={{ width: 0 }}
+                whileHover={{ width: "100%" }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
           ))}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="text-white hover:text-[#F4B400] hover:bg-[#F4B400]/20 transition-all duration-300 cursor-pointer"
-            style={{
-              transitionDelay: isMobileMenuOpen ? `${navLinks.length * 100}ms` : "0ms",
+          
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ 
+              x: isMobileMenuOpen ? 0 : 20, 
+              opacity: isMobileMenuOpen ? 1 : 0 
+            }}
+            transition={{ 
+              duration: 0.5, 
+              delay: isMobileMenuOpen ? navLinks.length * 0.1 : 0 
             }}
           >
-            <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-white hover:text-yellow-400 hover:bg-yellow-400/20 transition-all duration-300 cursor-pointer"
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
     
 
