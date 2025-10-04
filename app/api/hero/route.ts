@@ -18,11 +18,31 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const heroData = await request.json();
+    console.log('Received hero data:', heroData);
+    
     const data = await readData();
+    console.log('Current data before update:', data.hero);
+    
     data.hero = heroData;
+    console.log('Updated data:', data.hero);
+    
     await writeData(data);
-    return NextResponse.json(heroData, { status: 201 });
+    console.log('Data written successfully');
+    
+    // Verify the data was written correctly
+    const verifyData = await readData();
+    console.log('Verification - data after write:', verifyData.hero);
+    
+    return NextResponse.json({ 
+      success: true, 
+      data: heroData,
+      message: 'Hero data updated successfully' 
+    }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to update hero data' }, { status: 500 });
+    console.error('Error updating hero data:', error);
+    return NextResponse.json({ 
+      error: 'Failed to update hero data',
+      details: error instanceof Error ? error.message : 'Unknown error'
+    }, { status: 500 });
   }
 }

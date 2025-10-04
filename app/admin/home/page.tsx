@@ -75,11 +75,13 @@ export default function HomeAdminPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+    console.log('Form submitted with data:', heroData);
 
     try {
       let imageUrl = heroData.profileImage;
 
       if (selectedFile) {
+        console.log('Uploading file:', selectedFile.name);
         const uploadFormData = new FormData();
         uploadFormData.append('file', selectedFile);
 
@@ -91,22 +93,36 @@ export default function HomeAdminPage() {
         if (uploadResponse.ok) {
           const uploadData = await uploadResponse.json();
           imageUrl = uploadData.url;
+          console.log('File uploaded successfully:', imageUrl);
+        } else {
+          console.error('Upload failed:', uploadResponse.status);
         }
       }
+
+      const payload = {
+        ...heroData,
+        profileImage: imageUrl,
+      };
+      console.log('Sending payload to API:', payload);
 
       const response = await fetch('/api/hero', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...heroData,
-          profileImage: imageUrl,
-        }),
+        body: JSON.stringify(payload),
       });
 
+      console.log('API response status:', response.status);
+      
       if (response.ok) {
+        const result = await response.json();
+        console.log('API response data:', result);
         alert('Hero section updated successfully!');
         setSelectedFile(null);
         fetchHeroData();
+      } else {
+        const errorData = await response.json();
+        console.error('API error response:', errorData);
+        alert('Failed to update hero section. Please try again.');
       }
     } catch (error) {
       console.error('Failed to update hero data:', error);

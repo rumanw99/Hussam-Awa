@@ -23,8 +23,10 @@ export async function writeData(data: any) {
   if (useLocalStorage) {
     // Use local file storage
     try {
+      console.log('Writing data to file:', dataPath);
+      console.log('Data to write:', JSON.stringify(data, null, 2));
       fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-      console.log('✅ Data saved to local file');
+      console.log('✅ Data saved to local file successfully');
     } catch (error) {
       console.error('Error writing to local file:', error);
       throw error;
