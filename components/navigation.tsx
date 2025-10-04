@@ -192,12 +192,13 @@ export default function Navigation() {
           top: 0;
           left: 0;
           width: 100%;
-          height: 3px;
-          background: linear-gradient(90deg, #3B82F6, #F4B400);
+          height: 4px;
+          background: linear-gradient(90deg, #1A4DA1 0%, #3B82F6 25%, #60A5FA 50%, #F4B400 75%, #F59E0B 100%);
+          box-shadow: 0 0 20px rgba(244, 180, 0, 0.4), 0 0 40px rgba(26, 77, 161, 0.3);
           z-index: 9999;
           transform: scaleX(0);
           transform-origin: left;
-          transition: transform 0.3s ease-out;
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         `
         document.body.appendChild(scrollIndicator)
 
@@ -229,18 +230,31 @@ export default function Navigation() {
     <>
       {/* Enhanced Scroll Progress Bar */}
       <motion.div
-        className={`fixed top-0 left-0 right-0 z-50 h-1 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 h-1.5 transition-all duration-300 ${
           isModalOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="h-full bg-gradient-to-r from-blue-500/20 to-yellow-400/20" />
+        <div className="h-full bg-gradient-to-r from-blue-600/10 via-blue-700/15 to-yellow-400/10 backdrop-blur-sm" />
         <motion.div
-          className="h-full bg-gradient-to-r from-blue-500 to-yellow-400 shadow-lg"
+          className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-yellow-400 shadow-lg shadow-blue-500/25"
+          style={{
+            background: "linear-gradient(90deg, #1A4DA1 0%, #3B82F6 25%, #60A5FA 50%, #F4B400 75%, #F59E0B 100%)",
+            boxShadow: "0 0 20px rgba(244, 180, 0, 0.3), 0 0 40px rgba(26, 77, 161, 0.2)"
+          }}
           initial={{ width: 0 }}
           animate={{ width: `${scrollProgress}%` }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        />
+        <motion.div
+          className="absolute top-0 right-0 h-full w-1 bg-gradient-to-b from-yellow-400 to-yellow-300 shadow-lg shadow-yellow-400/50"
+          initial={{ opacity: 0, scaleY: 0 }}
+          animate={{ 
+            opacity: scrollProgress > 0 ? 1 : 0,
+            scaleY: scrollProgress > 0 ? 1 : 0
+          }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         />
       </motion.div>
