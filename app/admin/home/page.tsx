@@ -27,14 +27,21 @@ export default function HomeAdminPage() {
 
   const fetchHeroData = async () => {
     try {
+      console.log('Admin - Fetching hero data...');
       const response = await fetch('/api/hero');
+      console.log('Admin - Response status:', response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log('Admin - Received data:', data);
         setHeroData(data);
         setPreviewUrl(data.profileImage);
+        console.log('Admin - Data set in state');
+      } else {
+        console.error('Admin - API error:', response.status);
       }
     } catch (error) {
-      console.error('Failed to fetch hero data:', error);
+      console.error('Admin - Failed to fetch hero data:', error);
     } finally {
       setLoading(false);
     }

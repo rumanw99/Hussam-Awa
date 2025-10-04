@@ -64,8 +64,32 @@ class SimpleStorage {
       const path = await import('path');
       const dataPath = path.join(process.cwd(), 'data.json');
       
+      // Create backup of original data
+      try {
+        const originalData = fs.readFileSync(dataPath, 'utf8');
+        fs.writeFileSync(dataPath + '.backup', originalData);
+        console.log('Storage: Created backup of original data');
+      } catch (backupError) {
+        console.log('Storage: Could not create backup');
+      }
+      
       fs.writeFileSync(dataPath, JSON.stringify(newData, null, 2));
       console.log('Storage: Data persisted to file successfully');
+      
+      // Verify the data was written correctly
+      try {
+        const writtenData = fs.readFileSync(dataPath, 'utf8');
+        const parsedData = JSON.parse(writtenData);
+        console.log('Storage: Data verification successful');
+        console.log('Storage: Written data summary:', {
+          hero: !!parsedData.hero,
+          resume: !!parsedData.resume,
+          testimonials: parsedData.testimonials?.length || 0
+        });
+      } catch (verifyError) {
+        console.log('Storage: Data verification failed');
+      }
+      
     } catch (error) {
       console.log('Storage: Could not persist to file, data stored in memory only');
       console.log('Storage: Error details:', error);
