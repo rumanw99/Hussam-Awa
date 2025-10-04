@@ -62,14 +62,18 @@ export async function GET(request: NextRequest) {
       ],
       aboutMe: "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. I have extensive experience in developing and executing marketing and sales strategies, positioning, research, and branding for various production companies and Media Zone Authority 'towfour54'.",
       skills: [
-        { name: "Strategic Planning", level: 95 },
-        { name: "Team Leadership", level: 90 },
-        { name: "Media Production", level: 95 },
-        { name: "Marketing Strategy", level: 90 },
-        { name: "Sales Management", level: 88 },
-        { name: "HR Operations", level: 85 },
-        { name: "Event Management", level: 90 },
-        { name: "Project Coordination", level: 92 }
+        { name: "Strategic Planning and Execution", level: 95 },
+        { name: "Team Leadership and Communication", level: 90 },
+        { name: "Talent Management and Scheduling", level: 88 },
+        { name: "Logistics and Operations Management", level: 92 },
+        { name: "Budgeting and Negotiation", level: 85 },
+        { name: "Marketing Strategy and Implementation", level: 90 },
+        { name: "Media Relations and Communication", level: 88 },
+        { name: "Celebrity and Influencer Relations", level: 90 },
+        { name: "Multimedia Content Production", level: 95 },
+        { name: "Event Management and Coordination", level: 92 },
+        { name: "HR Management and Performance Systems", level: 85 },
+        { name: "Business Development and Sales", level: 88 }
       ]
     };
 

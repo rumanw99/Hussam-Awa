@@ -22,12 +22,18 @@ export default function Skills() {
           
           // Use skills from API only
           const iconMap: { [key: string]: any } = {
-            "Strategic Planning": Target,
-            "Media Production": Film,
-            "Team Leadership": Users,
-            "Business Development": DollarSign,
-            "HR Management": Award,
-            "Multilingual Communication": Globe,
+            "Strategic Planning and Execution": Target,
+            "Team Leadership and Communication": Users,
+            "Talent Management and Scheduling": Users,
+            "Logistics and Operations Management": Globe,
+            "Budgeting and Negotiation": DollarSign,
+            "Marketing Strategy and Implementation": Target,
+            "Media Relations and Communication": Globe,
+            "Celebrity and Influencer Relations": Users,
+            "Multimedia Content Production": Film,
+            "Event Management and Coordination": Award,
+            "HR Management and Performance Systems": Award,
+            "Business Development and Sales": DollarSign,
           }
 
           const formattedSkills = data.skills.map((skill: any) => ({
