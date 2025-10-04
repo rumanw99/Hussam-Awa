@@ -96,7 +96,34 @@ export default function Navigation() {
   ]
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // Enhanced smooth scroll to top with custom easing
+    const startPosition = window.pageYOffset
+    const duration = Math.min(Math.max(startPosition * 0.5, 300), 1000)
+    let startTime: number | null = null
+
+    const easeOutQuart = (t: number): number => {
+      return 1 - Math.pow(1 - t, 4)
+    }
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime
+      const timeElapsed = currentTime - startTime
+      const progress = Math.min(timeElapsed / duration, 1)
+      const ease = easeOutQuart(progress)
+
+      window.scrollTo({
+        top: startPosition * (1 - ease),
+        behavior: 'auto'
+      })
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation)
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' })
+      }
+    }
+
+    requestAnimationFrame(animation)
   }
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -106,34 +133,91 @@ export default function Navigation() {
       const element = document.getElementById(targetId)
 
       if (element) {
+        // Enhanced smooth scroll with better performance
         const navHeight = 80
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
         const offsetPosition = elementPosition - navHeight
 
-        // Custom smooth scroll with easing
+        // Improved smooth scroll with multiple easing options
         const startPosition = window.pageYOffset
         const distance = offsetPosition - startPosition
-        const duration = 800 // 0.8 seconds for snappier animation
+        const duration = Math.min(Math.max(Math.abs(distance) * 0.5, 300), 1200) // Dynamic duration based on distance
         let startTime: number | null = null
 
-        const easeInOutCubic = (t: number): number => {
-          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+        // Enhanced easing functions
+        const easingFunctions = {
+          easeInOutCubic: (t: number): number => {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+          },
+          easeOutQuart: (t: number): number => {
+            return 1 - Math.pow(1 - t, 4)
+          },
+          easeInOutQuart: (t: number): number => {
+            return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2
+          }
         }
+
+        // Use the most appropriate easing function based on distance
+        const easingFunction = Math.abs(distance) > 1000 ? 
+          easingFunctions.easeInOutQuart : 
+          easingFunctions.easeOutQuart
 
         const animation = (currentTime: number) => {
           if (startTime === null) startTime = currentTime
           const timeElapsed = currentTime - startTime
           const progress = Math.min(timeElapsed / duration, 1)
-          const ease = easeInOutCubic(progress)
+          const ease = easingFunction(progress)
 
-          window.scrollTo(0, startPosition + distance * ease)
+          // Smooth scroll with better performance
+          window.scrollTo({
+            top: startPosition + distance * ease,
+            behavior: 'auto' // Use 'auto' for better control
+          })
 
           if (timeElapsed < duration) {
             requestAnimationFrame(animation)
+          } else {
+            // Ensure we end exactly at the target position
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'auto'
+            })
           }
         }
 
+        // Add visual feedback during scroll
+        const scrollIndicator = document.createElement('div')
+        scrollIndicator.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(90deg, #3B82F6, #F4B400);
+          z-index: 9999;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease-out;
+        `
+        document.body.appendChild(scrollIndicator)
+
+        // Start the scroll animation
         requestAnimationFrame(animation)
+
+        // Animate the scroll indicator
+        setTimeout(() => {
+          scrollIndicator.style.transform = 'scaleX(1)'
+        }, 10)
+
+        // Clean up the indicator
+        setTimeout(() => {
+          scrollIndicator.style.transform = 'scaleX(0)'
+          setTimeout(() => {
+            if (scrollIndicator.parentNode) {
+              scrollIndicator.parentNode.removeChild(scrollIndicator)
+            }
+          }, 300)
+        }, duration * 0.8)
       }
     } else {
       router.push(href)
@@ -215,7 +299,16 @@ export default function Navigation() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
+                  onClick={(e) => {
+                    // Add click animation feedback
+                    const element = e.currentTarget
+                    element.style.transform = 'scale(0.95)'
+                    setTimeout(() => {
+                      element.style.transform = 'scale(1)'
+                    }, 150)
+                    
+                    handleNavClick(e, link.href)
+                  }}
                   className={`relative px-4 py-2 font-medium transition-all duration-300 rounded-lg group ${
                     activeSection === link.id
                       ? isScrolled
@@ -342,7 +435,16 @@ export default function Navigation() {
             <motion.a
               key={link.href}
               href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
+              onClick={(e) => {
+                // Add click animation feedback for mobile
+                const element = e.currentTarget
+                element.style.transform = 'scale(0.95) translateX(5px)'
+                setTimeout(() => {
+                  element.style.transform = 'scale(1) translateX(0px)'
+                }, 150)
+                
+                handleNavClick(e, link.href)
+              }}
               className="text-white text-2xl font-semibold transition-all duration-500 hover:text-yellow-400 hover:translate-x-2 relative group"
               initial={{ x: 20, opacity: 0 }}
               animate={{ 
