@@ -172,17 +172,17 @@ export default function Skills() {
             <div className="text-3xl font-bold mb-2">{skills.length}</div>
             <div className="text-blue-100 text-sm">Total Skills</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl text-white shadow-lg">
+          <div className="text-center p-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl text-white shadow-lg">
             <div className="text-3xl font-bold mb-2">{Math.round(skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length)}%</div>
-            <div className="text-green-100 text-sm">Avg Proficiency</div>
+            <div className="text-yellow-100 text-sm">Avg Proficiency</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl text-white shadow-lg">
+          <div className="text-center p-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl text-white shadow-lg">
             <div className="text-3xl font-bold mb-2">12+</div>
-            <div className="text-purple-100 text-sm">Years Experience</div>
+            <div className="text-blue-100 text-sm">Years Experience</div>
           </div>
-          <div className="text-center p-6 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl text-white shadow-lg">
+          <div className="text-center p-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl text-white shadow-lg">
             <div className="text-3xl font-bold mb-2">5</div>
-            <div className="text-orange-100 text-sm">Core Areas</div>
+            <div className="text-yellow-100 text-sm">Core Areas</div>
           </div>
         </motion.div>
 
@@ -196,25 +196,13 @@ export default function Skills() {
           {skills.map((skill, index) => {
             const Icon = skill.icon
             const getCategoryColor = (category: string) => {
-              switch (category) {
-                case 'Strategy': return 'from-blue-500 to-blue-600'
-                case 'Management': return 'from-green-500 to-green-600'
-                case 'Media': return 'from-purple-500 to-purple-600'
-                case 'Business': return 'from-orange-500 to-orange-600'
-                case 'Events': return 'from-pink-500 to-pink-600'
-                default: return 'from-gray-500 to-gray-600'
-              }
+              // Use only blue and yellow colors
+              return 'from-blue-500 to-blue-600'
             }
             
             const getCategoryBg = (category: string) => {
-              switch (category) {
-                case 'Strategy': return 'bg-blue-50 dark:bg-blue-900/20'
-                case 'Management': return 'bg-green-50 dark:bg-green-900/20'
-                case 'Media': return 'bg-purple-50 dark:bg-purple-900/20'
-                case 'Business': return 'bg-orange-50 dark:bg-orange-900/20'
-                case 'Events': return 'bg-pink-50 dark:bg-pink-900/20'
-                default: return 'bg-gray-50 dark:bg-gray-800'
-              }
+              // Use only blue and yellow backgrounds
+              return 'bg-blue-50 dark:bg-blue-900/20'
             }
             
             return (
@@ -232,7 +220,7 @@ export default function Skills() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <motion.div
-                    className={`p-4 rounded-2xl bg-gradient-to-r ${getCategoryColor(skill.category)} shadow-lg`}
+                    className="p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg"
                     whileHover={{ 
                       rotate: 360,
                       scale: 1.1
@@ -245,7 +233,7 @@ export default function Skills() {
                     <h3 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-1">
                       {skill.title}
                     </h3>
-                    <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${getCategoryColor(skill.category)} text-white`}>
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-yellow-400 to-yellow-500 text-white">
                       {skill.category}
                     </span>
                   </div>
@@ -258,7 +246,7 @@ export default function Skills() {
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                     <motion.div
-                      className={`h-full bg-gradient-to-r ${getCategoryColor(skill.category)} rounded-full`}
+                      className="h-full bg-gradient-to-r from-blue-500 to-yellow-400 rounded-full"
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       transition={{ duration: 1.5, delay: index * 0.1, ease: "easeOut" }}
