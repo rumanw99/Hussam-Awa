@@ -389,7 +389,7 @@ export default function Navigation() {
             </motion.div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       <motion.div
         className={`fixed top-0 right-0 h-full w-80 z-40 md:hidden transition-all duration-500 ${
@@ -494,10 +494,6 @@ export default function Navigation() {
           </motion.div>
         </div>
       </motion.div>
-
-    
-
-      
     </>
   )
 }
