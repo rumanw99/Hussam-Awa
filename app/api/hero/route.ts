@@ -4,17 +4,28 @@ import { readData, writeData } from '../../../lib/data';
 export async function GET() {
   try {
     console.log('Hero API - Starting request...');
-    const data = await readData();
-    console.log('Hero API - Full data loaded:', !!data);
-    console.log('Hero API - Hero data exists:', !!data.hero);
-    console.log('Hero API - Hero data:', data.hero);
     
-    const heroData = data.hero || {
-      name: "Hussam Awa",
-      titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
-      description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
-      profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
-    };
+    // Try to get from database first (persistent cache)
+    const { database } = await import('../../../lib/database');
+    let heroData = await database.get('hero');
+    
+    if (heroData) {
+      console.log('Hero API - Retrieved from database cache');
+    } else {
+      console.log('Hero API - Not in cache, loading from storage...');
+      const data = await readData();
+      heroData = data.hero;
+    }
+    
+    // Fallback to default if no data
+    if (!heroData) {
+      heroData = {
+        name: "Hussam Awa",
+        titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
+        description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
+        profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
+      };
+    }
     
     console.log('Hero API - Returning hero data:', heroData);
     return NextResponse.json(heroData);
@@ -37,23 +48,21 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
     
+    // Save to database first (persistent cache)
+    const { database } = await import('../../../lib/database');
+    await database.set('hero', heroData);
+    console.log('Hero data saved to database cache');
+    
+    // Also save to storage (file system)
     const data = await readData();
-    console.log('Current data before update:', data.hero);
-    
     data.hero = heroData;
-    console.log('Updated data:', data.hero);
-    
     await writeData(data);
-    console.log('Data written successfully');
-    
-    // Verify the data was written correctly
-    const verifyData = await readData();
-    console.log('Verification - data after write:', verifyData.hero);
+    console.log('Hero data saved to storage');
     
     return NextResponse.json({ 
       success: true, 
       data: heroData,
-      message: 'Hero data updated successfully',
+      message: 'Hero data updated successfully and persisted',
       environment: process.env.NODE_ENV
     }, { status: 200 });
   } catch (error) {
