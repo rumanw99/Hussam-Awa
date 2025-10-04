@@ -57,8 +57,19 @@ export async function GET(request: NextRequest) {
       ]
     };
 
-    const resumeData = data.resume || defaultResume;
+    // Check if resume data exists and has content
+    const hasExperience = data.resume?.experience && data.resume.experience.length > 0;
+    const hasSkills = data.resume?.skills && data.resume.skills.length > 0;
+    const hasAboutMe = data.resume?.aboutMe && data.resume.aboutMe.trim() !== '';
+    
+    console.log('Resume API - Has experience:', hasExperience);
+    console.log('Resume API - Has skills:', hasSkills);
+    console.log('Resume API - Has aboutMe:', hasAboutMe);
+    
+    // Use default data if resume is empty or missing key sections
+    const resumeData = (hasExperience || hasSkills || hasAboutMe) ? data.resume : defaultResume;
     console.log('Resume API - Returning resume data:', resumeData);
+    console.log('Resume API - Experience count:', resumeData.experience?.length || 0);
     return NextResponse.json(resumeData);
   } catch (error) {
     console.error('Resume API - Error:', error);
