@@ -54,7 +54,22 @@ export default function About() {
           console.log('About data content:', data.content)
           console.log('About data profileImage:', data.profileImage)
           console.log('About data title:', data.title)
-          setAboutData(data)
+          
+          // Merge with default data to ensure we have fallbacks
+          const mergedData = {
+            title: data.title || 'Golden Visa Holder',
+            profileImage: data.profileImage || 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg',
+            content: data.content || 'Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai\'s dynamic business environment.',
+            stats: data.stats || [
+              { icon: "Briefcase", value: "12+", label: "Years Experience" },
+              { icon: "DollarSign", value: "$5M+", label: "Revenue Generated" },
+              { icon: "Users", value: "20+", label: "Team Members Led" },
+              { icon: "Award", value: "100+", label: "Projects Completed" }
+            ]
+          }
+          
+          console.log('About merged data:', mergedData)
+          setAboutData(mergedData)
         } else {
           console.error('About API error:', response.status, response.statusText)
         }
