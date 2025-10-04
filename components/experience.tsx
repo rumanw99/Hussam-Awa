@@ -12,9 +12,14 @@ export default function Experience() {
   useEffect(() => {
     const fetchExperience = async () => {
       try {
+        console.log('Experience component - Fetching data...')
         const response = await fetch('/api/resume')
+        console.log('Experience component - Response status:', response.status)
+        
         if (response.ok) {
           const data = await response.json()
+          console.log('Experience component - Received data:', data)
+          console.log('Experience component - Experience data:', data.experience)
           
           // Use experiences from API only
           const formattedExperiences = data.experience.map((exp: any) => ({
@@ -24,10 +29,13 @@ export default function Experience() {
             responsibilities: exp.description.split('\n').filter((line: string) => line.trim())
           }))
 
+          console.log('Experience component - Formatted experiences:', formattedExperiences)
           setExperiences(formattedExperiences)
+        } else {
+          console.error('Experience component - API error:', response.status)
         }
       } catch (error) {
-        console.error('Failed to fetch experience:', error)
+        console.error('Experience component - Failed to fetch experience:', error)
       } finally {
         setLoading(false)
       }

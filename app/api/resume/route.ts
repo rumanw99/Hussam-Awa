@@ -4,6 +4,9 @@ import { readData, writeData } from '../../../lib/data';
 export async function GET(request: NextRequest) {
   try {
     const data = await readData();
+    console.log('Resume API - Full data:', data);
+    console.log('Resume API - Resume data:', data.resume);
+    
     const { searchParams } = new URL(request.url);
     const section = searchParams.get('section');
 
@@ -11,11 +14,14 @@ export async function GET(request: NextRequest) {
       if (!['experience', 'aboutMe', 'skills'].includes(section)) {
         return NextResponse.json({ error: 'Invalid section' }, { status: 400 });
       }
+      console.log(`Resume API - Returning section ${section}:`, data.resume[section]);
       return NextResponse.json(data.resume[section]);
     }
 
+    console.log('Resume API - Returning full resume data:', data.resume);
     return NextResponse.json(data.resume);
   } catch (error) {
+    console.error('Resume API - Error:', error);
     return NextResponse.json({ error: 'Failed to read resume' }, { status: 500 });
   }
 }

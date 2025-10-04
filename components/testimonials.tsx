@@ -15,14 +15,20 @@ export default function Testimonials() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
+        console.log('Testimonials component - Fetching data...')
         const response = await fetch('/api/testimonials')
+        console.log('Testimonials component - Response status:', response.status)
+        
         if (response.ok) {
           const data = await response.json()
+          console.log('Testimonials component - Received data:', data)
           
           setTestimonials(data)
+        } else {
+          console.error('Testimonials component - API error:', response.status)
         }
       } catch (error) {
-        console.error('Failed to fetch testimonials:', error)
+        console.error('Testimonials component - Failed to fetch testimonials:', error)
       } finally {
         setLoading(false)
       }
@@ -42,7 +48,34 @@ export default function Testimonials() {
   }
 
   if (testimonials.length === 0) {
-    return null
+    return (
+      <section id="testimonials" className="py-24 bg-blue-50/50 dark:bg-gray-900/50">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.h2
+            className="text-4xl md:text-5xl font-bold mb-4 text-blue-600 dark:text-blue-400"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Client Testimonials
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-600 dark:text-gray-300 mb-8"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            What Our Clients Say
+          </motion.p>
+          <div className="w-16 h-1 mb-12 bg-yellow-400" />
+          <div className="text-center text-gray-500 dark:text-gray-400">
+            No testimonials available. Please add testimonials through the admin panel.
+          </div>
+        </div>
+      </section>
+    )
   }
 
   const containerVariants = {

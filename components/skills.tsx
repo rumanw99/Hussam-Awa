@@ -11,9 +11,14 @@ export default function Skills() {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
+        console.log('Skills component - Fetching data...')
         const response = await fetch('/api/resume')
+        console.log('Skills component - Response status:', response.status)
+        
         if (response.ok) {
           const data = await response.json()
+          console.log('Skills component - Received data:', data)
+          console.log('Skills component - Skills data:', data.skills)
           
           // Use skills from API only
           const iconMap: { [key: string]: any } = {
@@ -31,10 +36,13 @@ export default function Skills() {
             description: `${skill.level}`
           }))
 
+          console.log('Skills component - Formatted skills:', formattedSkills)
           setSkills(formattedSkills)
+        } else {
+          console.error('Skills component - API error:', response.status)
         }
       } catch (error) {
-        console.error('Failed to fetch skills:', error)
+        console.error('Skills component - Failed to fetch skills:', error)
       } finally {
         setLoading(false)
       }

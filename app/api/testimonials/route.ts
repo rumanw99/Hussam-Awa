@@ -4,8 +4,11 @@ import { readData, writeData } from '../../../lib/data';
 export async function GET() {
   try {
     const data = await readData();
+    console.log('Testimonials API - Full data:', data);
+    console.log('Testimonials API - Testimonials data:', data.testimonials);
     return NextResponse.json(data.testimonials || []);
   } catch (error) {
+    console.error('Testimonials API - Error:', error);
     return NextResponse.json({ error: 'Failed to read testimonials' }, { status: 500 });
   }
 }
