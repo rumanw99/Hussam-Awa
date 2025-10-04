@@ -3,9 +3,12 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET(request: NextRequest) {
   try {
+    console.log('Resume API - Starting request...');
     const data = await readData();
-    console.log('Resume API - Full data:', data);
-    console.log('Resume API - Resume data:', data.resume);
+    console.log('Resume API - Full data loaded:', !!data);
+    console.log('Resume API - Resume data exists:', !!data.resume);
+    console.log('Resume API - Experience count:', data.resume?.experience?.length || 0);
+    console.log('Resume API - Skills count:', data.resume?.skills?.length || 0);
     
     const { searchParams } = new URL(request.url);
     const section = searchParams.get('section');

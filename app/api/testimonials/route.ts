@@ -3,9 +3,11 @@ import { readData, writeData } from '../../../lib/data';
 
 export async function GET() {
   try {
+    console.log('Testimonials API - Starting request...');
     const data = await readData();
-    console.log('Testimonials API - Full data:', data);
-    console.log('Testimonials API - Testimonials data:', data.testimonials);
+    console.log('Testimonials API - Full data loaded:', !!data);
+    console.log('Testimonials API - Testimonials data exists:', !!data.testimonials);
+    console.log('Testimonials API - Testimonials count:', data.testimonials?.length || 0);
     return NextResponse.json(data.testimonials || []);
   } catch (error) {
     console.error('Testimonials API - Error:', error);

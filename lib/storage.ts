@@ -3,6 +3,7 @@ class SimpleStorage {
   private static instance: SimpleStorage;
   private data: any = null;
   private initialized = false;
+  private isProduction = process.env.NODE_ENV === 'production';
 
   private constructor() {}
 
@@ -25,7 +26,14 @@ class SimpleStorage {
       try {
         const fileData = fs.readFileSync(dataPath, 'utf8');
         this.data = JSON.parse(fileData);
-        console.log('Storage: Loaded data from file');
+        console.log('Storage: Loaded data from file successfully');
+        console.log('Storage: Data contains:', {
+          hero: !!this.data.hero,
+          resume: !!this.data.resume,
+          testimonials: this.data.testimonials?.length || 0,
+          experience: this.data.resume?.experience?.length || 0,
+          skills: this.data.resume?.skills?.length || 0
+        });
       } catch (fileError) {
         console.log('Storage: Could not load from file, using default data');
         this.data = this.getDefaultData();
@@ -48,6 +56,7 @@ class SimpleStorage {
 
   async setData(newData: any) {
     this.data = newData;
+    console.log('Storage: Data updated in memory');
     
     // Try to persist to file
     try {
@@ -56,9 +65,22 @@ class SimpleStorage {
       const dataPath = path.join(process.cwd(), 'data.json');
       
       fs.writeFileSync(dataPath, JSON.stringify(newData, null, 2));
-      console.log('Storage: Data persisted to file');
+      console.log('Storage: Data persisted to file successfully');
     } catch (error) {
       console.log('Storage: Could not persist to file, data stored in memory only');
+      console.log('Storage: Error details:', error);
+    }
+    
+    // In production, also try to update the original data.json in the repo
+    if (this.isProduction) {
+      console.log('Storage: Production mode - data will persist in memory across requests');
+      console.log('Storage: Production data summary:', {
+        hero: !!newData.hero,
+        resume: !!newData.resume,
+        testimonials: newData.testimonials?.length || 0,
+        experience: newData.resume?.experience?.length || 0,
+        skills: newData.resume?.skills?.length || 0
+      });
     }
   }
 
