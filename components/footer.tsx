@@ -333,7 +333,7 @@ export default function Footer() {
       {showBackToTop && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 p-4 rounded-full shadow-2xl border-2 border-white/20 backdrop-blur-sm"
+          className="fixed bottom-8 right-8 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 p-4 rounded-full shadow-2xl border-2 border-white/20 backdrop-blur-sm cursor-pointer"
           aria-label="Back to top"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
