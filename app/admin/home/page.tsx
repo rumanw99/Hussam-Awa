@@ -116,7 +116,7 @@ export default function HomeAdminPage() {
       if (response.ok) {
         const result = await response.json();
         console.log('API response data:', result);
-        alert('✅ Hero section updated successfully!');
+        alert('✅ Hero section updated successfully! Changes will persist across page refreshes.');
         setSelectedFile(null);
         fetchHeroData();
       } else {
