@@ -380,7 +380,6 @@ export default function Contact() {
                       size="lg"
                       className="w-full font-bold text-lg py-4 rounded-xl transition-all duration-300 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white hover:from-blue-600 hover:to-blue-700 hover:text-yellow-400 shadow-lg hover:shadow-xl"
                       whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
                     >
                       <Send className="w-5 h-5 mr-2" />
                       Send Message

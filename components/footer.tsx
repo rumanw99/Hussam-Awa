@@ -286,7 +286,6 @@ export default function Footer() {
                     rotate: 360,
                     backgroundColor: "rgba(244, 180, 0, 0.2)"
                   }}
-                  whileTap={{ scale: 0.9 }}
                 >
                   <social.icon className="w-6 h-6" />
                 </motion.a>
@@ -329,35 +328,7 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      {/* Enhanced Back to Top Button */}
-      {showBackToTop && (
-        <motion.button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 p-4 rounded-full shadow-2xl border-2 border-white/20 backdrop-blur-sm cursor-pointer"
-          aria-label="Back to top"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          whileHover={{ 
-            scale: 1.1,
-            rotate: 360,
-            boxShadow: "0 10px 30px rgba(244, 180, 0, 0.4)"
-          }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.div
-            animate={{ y: [-2, 2, -2] }}
-            transition={{ 
-              duration: 1.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <ArrowUp className="w-6 h-6" />
-          </motion.div>
-        </motion.button>
-      )}
+     
     </footer>
   )
 }

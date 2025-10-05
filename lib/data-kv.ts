@@ -31,7 +31,7 @@ function getDefaultData() {
     hero: {
       name: "Hussam Awa",
       titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
-      description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership. Executive Producer, HR, Sales Manager and Marketing Manager with extensive experience in Dubai's dynamic media industry.",
+      description: "Experienced media professional with 12+ years of expertise in production, marketing, and team leadership. Executive Producer, HR, Sales Manager and Marketing Manager with extensive experience in Dubai's dynamic media industry.",
       profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
     },
     photos: [
@@ -63,7 +63,7 @@ function getDefaultData() {
       }
     ],
     about: {
-      title: "Golden Visa Holder",
+      title: "Media Industry Expert",
       profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg",
       content: "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. I have extensive experience in developing and executing marketing and sales strategies, positioning, research, and branding for various production companies and Media Zone Authority 'towfour54'.\n\nMy expertise includes:\n• Producing multimedia content for TV, web, and social media platforms, including documentaries, commercials, and corporate videos\n• Managing sales and business development activities, generating over $5 million in revenue and securing long-term partnerships with key clients\n• Leading and mentoring teams of up to 20 creative professionals, enhancing employee relations and performance\n• Developing comprehensive sales and marketing plans for high-profile events\n• Establishing effective communication channels with various media outlets\n• Coordinating charity concerts and managing contracts and logistical details\n• Leading job analysis projects to evaluate and redesign positions\n• Designing and implementing performance management systems\n• Creating training and development programs for employees\n\nI hold a golden visa as a multimedia producer and am eager to contribute to the success of organizations while growing professionally. I am fluent in Arabic and English, with exceptional communication skills and celebrity contacts.",
       stats: [

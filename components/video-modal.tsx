@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 interface VideoModalProps {
   video: {
     src: string
+    url?: string // Add url as optional for compatibility
     title: string
     description: string
   }
@@ -27,6 +28,29 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
     setIsLoading(true)
     return () => {
       document.body.style.overflow = ""
+    }
+  }, [video.src])
+
+  // Auto-play video when modal opens
+  useEffect(() => {
+    const videoElement = document.querySelector('video')
+    if (videoElement) {
+      // Try to play the video with sound
+      const playVideo = async () => {
+        try {
+          // Ensure video is unmuted
+          videoElement.muted = false
+          videoElement.volume = 1.0
+          await videoElement.play()
+          console.log('Video auto-played successfully with sound')
+        } catch (error) {
+          console.log('Auto-play prevented by browser:', error)
+          // This is normal - browsers often prevent auto-play
+        }
+      }
+      
+      // Small delay to ensure video is ready
+      setTimeout(playVideo, 100)
     }
   }, [video.src])
 
@@ -63,7 +87,6 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
             }}
             aria-label="Previous video"
             whileHover={{ scale: 1.1, x: -5 }}
-            whileTap={{ scale: 0.9 }}
           >
             <ChevronLeft className="w-6 h-6" />
           </motion.button>
@@ -76,7 +99,6 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
             }}
             aria-label="Next video"
             whileHover={{ scale: 1.1, x: 5 }}
-            whileTap={{ scale: 0.9 }}
           >
             <ChevronRight className="w-6 h-6" />
           </motion.button>
@@ -95,7 +117,6 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
           className="absolute top-2 right-2 text-white hover:text-yellow-400 transition-colors p-3 rounded-full bg-black/70 hover:bg-black/90 z-10 shadow-lg"
           onClick={onClose}
           whileHover={{ scale: 1.1, rotate: 90 }}
-          whileTap={{ scale: 0.9 }}
           aria-label="Close video modal"
         >
           <X className="w-7 h-7" />
@@ -131,32 +152,55 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
             </div>
           ) : (
             <video
-              src={video.src}
+              src={video.src || video.url}
               controls
-              preload="none"
+              autoPlay
+              preload="metadata"
               className="w-full h-full object-contain"
               controlsList="nodownload"
               playsInline
               webkit-playsinline="true"
-              muted
               onError={(e) => {
                 console.error('Video load error:', e);
+                console.error('Video src:', video.src || video.url);
                 setVideoError(true)
                 setIsLoading(false)
               }}
               onLoadStart={() => {
-                console.log('Video loading started:', video.src);
+                console.log('Video loading started:', video.src || video.url);
               }}
               onCanPlay={() => {
-                console.log('Video can play:', video.src);
+                console.log('Video can play:', video.src || video.url);
                 setIsLoading(false)
               }}
               onLoadedData={() => {
-                console.log('Video data loaded:', video.src);
+                console.log('Video data loaded:', video.src || video.url);
                 setIsLoading(false)
               }}
               onLoadedMetadata={() => {
-                console.log('Video metadata loaded:', video.src);
+                console.log('Video metadata loaded:', video.src || video.url);
+              }}
+              onPlay={(e) => {
+                console.log('Video started playing:', video.src || video.url);
+                setIsLoading(false)
+                // Ensure sound is enabled
+                const videoElement = e.target as HTMLVideoElement
+                videoElement.muted = false
+                videoElement.volume = 1.0
+              }}
+              onPlaying={(e) => {
+                console.log('Video is playing:', video.src || video.url);
+                setIsLoading(false)
+                // Ensure sound is enabled
+                const videoElement = e.target as HTMLVideoElement
+                videoElement.muted = false
+                videoElement.volume = 1.0
+              }}
+              onPause={() => {
+                console.log('Video paused:', video.src || video.url);
+              }}
+              onEnded={() => {
+                console.log('Video ended:', video.src || video.url);
               }}
             />
           )}
@@ -177,7 +221,6 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
               disabled={videos.length <= 1}
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 rounded-full font-semibold hover:from-yellow-500 hover:to-yellow-600 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               whileHover={{ scale: 1.05, x: -5 }}
-              whileTap={{ scale: 0.95 }}
               aria-label="Previous video"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -188,7 +231,6 @@ export default function VideoModal({ video, videos, currentIndex, onClose, onNex
               disabled={videos.length <= 1}
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 rounded-full font-semibold hover:from-yellow-500 hover:to-yellow-600 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               whileHover={{ scale: 1.05, x: 5 }}
-              whileTap={{ scale: 0.95 }}
               aria-label="Next video"
             >
               Next

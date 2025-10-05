@@ -9,9 +9,9 @@ import { motion } from "framer-motion"
 export default function About() {
   const [isVisible, setIsVisible] = useState(false)
   const [aboutData, setAboutData] = useState({
-    title: 'Golden Visa Holder',
+    title: 'Media Industry Expert',
     profileImage: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg',
-    content: 'Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai\'s dynamic business environment. I specialize in creating compelling visual content and leading high-performing teams to deliver exceptional results.',
+    content: 'Experienced professional with a proven track record in media production, marketing, and team leadership. Media industry expert with extensive experience in Dubai\'s dynamic business environment. I specialize in creating compelling visual content and leading high-performing teams to deliver exceptional results.',
     stats: [
       { icon: "Briefcase", value: "12+", label: "Years Experience" },
       { icon: "DollarSign", value: "$5M+", label: "Revenue Generated" },
@@ -58,9 +58,9 @@ export default function About() {
           
           // Merge with default data to ensure we have fallbacks
           const mergedData = {
-            title: data.title || 'Golden Visa Holder',
+            title: data.title || 'Media Industry Expert',
             profileImage: data.profileImage || 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg',
-            content: data.content || 'Experienced professional with a proven track record in media production, marketing, and team leadership. Golden Visa holder with extensive experience in Dubai\'s dynamic business environment.',
+            content: data.content || 'Experienced professional with a proven track record in media production, marketing, and team leadership. Media industry expert with extensive experience in Dubai\'s dynamic business environment.',
             stats: data.stats || [
               { icon: "Briefcase", value: "12+", label: "Years Experience" },
               { icon: "DollarSign", value: "$5M+", label: "Revenue Generated" },
@@ -217,7 +217,6 @@ export default function About() {
                       scale: 1.05,
                       y: -5
                     }}
-                    whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}

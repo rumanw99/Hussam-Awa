@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readData, writeData } from '../../../lib/data';
 
+// Helper function to convert text levels to numbers
+function convertLevelToNumber(level: string | number): number {
+  if (typeof level === 'number') return level;
+  
+  const levelMap: { [key: string]: number } = {
+    'Expert': 95,
+    'Advanced': 85,
+    'Intermediate': 70,
+    'Beginner': 50,
+    'Novice': 30
+  };
+  
+  return levelMap[level] || 50; // Default to 50 if unknown
+}
+
 export async function GET(request: NextRequest) {
   try {
     console.log('Resume API - Starting request...');
@@ -88,6 +103,15 @@ export async function GET(request: NextRequest) {
     
     // Use default data if resume is empty or missing key sections
     const resumeData = (hasExperience || hasSkills || hasAboutMe) ? data.resume : defaultResume;
+    
+    // Convert text levels to numbers for skills
+    if (resumeData.skills && resumeData.skills.length > 0) {
+      resumeData.skills = resumeData.skills.map((skill: any) => ({
+        ...skill,
+        level: convertLevelToNumber(skill.level)
+      }));
+    }
+    
     console.log('Resume API - Returning resume data:', resumeData);
     console.log('Resume API - Experience count:', resumeData.experience?.length || 0);
     return NextResponse.json(resumeData);

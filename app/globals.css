@@ -150,15 +150,27 @@
     @apply bg-background text-foreground;
   }
 
-  /* Adding smooth scroll behavior globally */
+  /* Enhanced smooth scroll with better performance */
   html {
+    scroll-behavior: auto;
+    scroll-padding-top: 80px; /* Account for fixed header */
+  }
+
+  /* Optimize scrolling performance */
+  * {
     scroll-behavior: smooth;
+  }
+
+  html, body {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y proximity;
   }
 
   /* Custom smooth scroll with easing for better animation */
   @media (prefers-reduced-motion: no-preference) {
     html {
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
     }
   }
 }
@@ -294,5 +306,133 @@
     width: 2px;
     height: 2px;
     animation-duration: 12s;
+  }
+}
+
+/* Custom Scroll Progress Bar Styles - Inverted Blue and Yellow Theme */
+.scroll-progress-bar {
+  background: linear-gradient(90deg, #f4b400 0%, #f59e0b 100%) !important;
+  box-shadow: 0 0 15px rgba(244, 180, 0, 0.5), 0 0 30px rgba(244, 180, 0, 0.4) !important;
+  border: 1px solid rgba(244, 180, 0, 0.3) !important;
+}
+
+.scroll-progress-background {
+  background: linear-gradient(90deg, rgba(26, 77, 161, 0.3) 0%, rgba(37, 99, 184, 0.4) 100%) !important;
+  box-shadow: inset 0 0 20px rgba(26, 77, 161, 0.2) !important;
+}
+
+.scroll-progress-indicator {
+  background: linear-gradient(180deg, #f4b400 0%, #f59e0b 100%) !important;
+  box-shadow: 0 0 12px rgba(244, 180, 0, 0.7), 0 0 24px rgba(244, 180, 0, 0.5) !important;
+  border: 1px solid rgba(244, 180, 0, 0.5) !important;
+}
+
+.scroll-temp-indicator {
+  background: linear-gradient(90deg, #f4b400 0%, #f59e0b 100%) !important;
+  background-image: linear-gradient(90deg, #f4b400 0%, #f59e0b 100%) !important;
+  box-shadow: 0 0 15px rgba(244, 180, 0, 0.6), 0 0 30px rgba(244, 180, 0, 0.5) !important;
+  border: 1px solid rgba(244, 180, 0, 0.4) !important;
+}
+
+/* Additional Blue and Yellow Scroll Effects */
+.scroll-progress-bar:hover {
+  box-shadow: 0 0 20px rgba(244, 180, 0, 0.7), 0 0 40px rgba(26, 77, 161, 0.6) !important;
+}
+
+.scroll-progress-indicator:hover {
+  box-shadow: 0 0 15px rgba(244, 180, 0, 0.8), 0 0 30px rgba(244, 180, 0, 0.6) !important;
+}
+
+/* Custom Browser Scrollbar Styles - Blue and Yellow Theme */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(26, 77, 161, 0.3) 0%, rgba(37, 99, 184, 0.4) 100%);
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(26, 77, 161, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f4b400 0%, #f59e0b 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(244, 180, 0, 0.5), 0 0 20px rgba(244, 180, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f59e0b 0%, #f4b400 100%);
+  box-shadow: 0 0 15px rgba(244, 180, 0, 0.7), 0 0 30px rgba(244, 180, 0, 0.5);
+  transform: scale(1.05);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #f4b400 0%, #f59e0b 100%);
+  box-shadow: 0 0 20px rgba(244, 180, 0, 0.8), 0 0 40px rgba(244, 180, 0, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: linear-gradient(135deg, rgba(26, 77, 161, 0.3) 0%, rgba(37, 99, 184, 0.4) 100%);
+}
+
+/* Firefox Scrollbar Styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f4b400 #1a4da1;
+}
+
+/* Custom scrollbar for dark mode */
+.dark ::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(26, 77, 161, 0.4) 0%, rgba(37, 99, 184, 0.5) 100%);
+  box-shadow: inset 0 0 5px rgba(26, 77, 161, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f4b400 0%, #f59e0b 100%);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(244, 180, 0, 0.6), 0 0 20px rgba(244, 180, 0, 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f59e0b 0%, #f4b400 100%);
+  box-shadow: 0 0 15px rgba(244, 180, 0, 0.8), 0 0 30px rgba(244, 180, 0, 0.6);
+}
+
+/* Additional scrollbar animations */
+::-webkit-scrollbar-thumb {
+  animation: scrollbarGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes scrollbarGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(244, 180, 0, 0.3), 0 0 20px rgba(26, 77, 161, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(244, 180, 0, 0.5), 0 0 30px rgba(26, 77, 161, 0.4);
+  }
+}
+
+/* Smooth scrollbar transitions */
+::-webkit-scrollbar-thumb {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile scrollbar optimization */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }

@@ -8,26 +8,36 @@ export async function GET() {
     console.log('Videos API - Full data loaded:', !!data);
     console.log('Videos API - Videos data exists:', !!data.videos);
     console.log('Videos API - Videos count:', data.videos?.length || 0);
+    console.log('Videos API - First video from data:', data.videos?.[0]?.url);
     
     // Default videos if none exist
     const defaultVideos = [
       {
-        title: "Portfolio Video 1",
+        title: "Video 1",
         description: "Professional video showcasing my work",
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp-Video-2025-09-30-at-12.23.14-AM.mp4",
+        url: "/video/WhatsApp Video 2025-09-30 at 12.22.59 AM.mp4",
         thumbnail: "/video-production-thumbnail.png"
       },
       {
-        title: "Corporate Video",
+        title: "Video 2",
         description: "High-quality corporate video production",
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp-Video-2025-09-30-at-12.23.14-AM.mp4",
+        url: "/video/WhatsApp Video 2025-09-30 at 12.23.01 AM.mp4",
+        thumbnail: "/video-production-thumbnail.png"
+      },
+      {
+        title: "Video 3",
+        description: "Creative video production showcase",
+        url: "/video/WhatsApp Video 2025-09-30 at 12.23.04 AM.mp4",
         thumbnail: "/video-production-thumbnail.png"
       }
     ];
     
     // Use default videos if none exist
     const videos = data.videos && data.videos.length > 0 ? data.videos : defaultVideos;
+    console.log('Videos API - Data videos count:', data.videos?.length || 0);
+    console.log('Videos API - Default videos count:', defaultVideos.length);
     console.log('Videos API - Returning videos count:', videos.length);
+    console.log('Videos API - First video URL:', videos[0]?.url);
     return NextResponse.json(videos);
   } catch (error) {
     console.error('Videos API - Error:', error);

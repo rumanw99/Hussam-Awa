@@ -17,7 +17,7 @@ export default function Hero() {
   const [heroData, setHeroData] = useState({
     name: "Hussam Awa",
     titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
-    description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
+    description: "Experienced media professional with 12+ years of expertise in production, marketing, and team leadership in Dubai's dynamic industry.",
     profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
   })
 
@@ -96,7 +96,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="home"
-      className="min-h-screen flex flex-col items-center justify-center relative pt-16 sm:pt-20 overflow-hidden overflow-x-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-gray-900 dark:via-blue-900 dark:to-gray-800"
+      className="h-screen flex flex-col items-center justify-center relative overflow-hidden overflow-x-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 dark:from-gray-900 dark:via-blue-900 dark:to-gray-800"
     >
       {/* Enhanced Animated Background */}
       <motion.div
@@ -160,18 +160,18 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 z-10 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 z-10 w-full h-full flex items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center w-full h-full">
           {/* Content Section */}
           <motion.div
-            className="space-y-6 sm:space-y-8"
+            className="space-y-3 sm:space-y-4 flex flex-col justify-center h-full"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             {/* Welcome Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-400/20 border border-yellow-400/30 backdrop-blur-sm"
+              className="inline-flex items-center mt-6 gap-2 px-4 py-2 rounded-full bg-yellow-400/20 border border-yellow-400/30 backdrop-blur-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -181,13 +181,13 @@ export default function Hero() {
             </motion.div>
 
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <motion.span
-                className="block text-white"
+                className="inline-block text-white"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
@@ -195,7 +195,7 @@ export default function Hero() {
                 {heroData.name.split(' ')[0]}
               </motion.span>
               <motion.span
-                className="block text-yellow-400"
+                className="inline-block text-yellow-400 ml-2"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 1.0 }}
@@ -206,12 +206,12 @@ export default function Hero() {
 
             {/* Animated Title */}
             <motion.div
-              className="h-16 sm:h-20 flex items-center"
+              className="h-12 sm:h-16 flex items-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              <span className="text-xl sm:text-2xl md:text-3xl font-light text-white">
+              <span className="text-lg sm:text-xl md:text-2xl font-light text-white">
                 {typedText}
                 <motion.span
                   className="inline-block w-0.5 h-6 sm:h-8 ml-1 bg-yellow-400"
@@ -223,7 +223,7 @@ export default function Hero() {
 
             {/* Description */}
             <motion.p
-              className="text-base sm:text-lg md:text-xl text-white/95 max-w-lg leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-white/95 max-w-lg leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.4 }}
@@ -233,35 +233,35 @@ export default function Hero() {
 
             {/* Stats Cards */}
             <motion.div
-              className="grid grid-cols-2 gap-4 my-8"
+              className="grid grid-cols-2 gap-3 my-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.6 }}
             >
               <motion.div
-                className="p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
+                className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center gap-3">
-                  <Award className="w-6 h-6 text-yellow-400" />
+                <div className="flex items-center gap-2">
+                  <Award className="w-5 h-5 text-yellow-400" />
                   <div>
-                    <div className="text-2xl font-bold text-white">12+</div>
-                    <div className="text-sm text-white/80">Years Experience</div>
+                    <div className="text-xl font-bold text-white">12+</div>
+                    <div className="text-xs text-white/80">Years Experience</div>
                   </div>
                 </div>
               </motion.div>
 
               <motion.div
-                className="p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
+                className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center gap-3">
-                  <Globe className="w-6 h-6 text-yellow-400" />
+                <div className="flex items-center gap-2">
+                  <Globe className="w-5 h-5 text-yellow-400" />
                   <div>
-                    <div className="text-2xl font-bold text-white">$5M+</div>
-                    <div className="text-sm text-white/80">Revenue Generated</div>
+                    <div className="text-xl font-bold text-white">$5M+</div>
+                    <div className="text-xs text-white/80">Revenue Generated</div>
                   </div>
                 </div>
               </motion.div>
@@ -269,18 +269,17 @@ export default function Hero() {
 
             {/* Action Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row flex-wrap gap-4 pt-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-4 pt-2"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.8 }}
             >
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
             >
               <Button
                 size="lg"
-                  className="font-bold text-lg px-8 py-4 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-white hover:from-blue-600 hover:to-blue-700 hover:text-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="font-bold text-base px-6 py-3 rounded-xl bg-gradient-to-r from-yellow-400 to-yellow-500 text-white hover:from-blue-600 hover:to-blue-700 hover:text-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl"
                 asChild
               >
                   <a href="#contact" className="flex items-center justify-center gap-2">
@@ -292,12 +291,11 @@ export default function Hero() {
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
               <Button
                 size="lg"
                 variant="outline"
-                  className="font-bold text-lg px-8 py-4 rounded-xl border-2 border-white text-white hover:bg-white/10 bg-transparent transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="font-bold text-base px-6 py-3 rounded-xl border-2 border-white text-white hover:bg-white/10 bg-transparent transition-all duration-300 shadow-lg hover:shadow-xl"
                 asChild
               >
                   <a href="#about" className="flex items-center justify-center gap-2">
@@ -311,7 +309,7 @@ export default function Hero() {
 
           {/* Image Section */}
           <motion.div
-            className="flex justify-center order-first md:order-none"
+            className="flex justify-center items-center order-first md:order-none h-full"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -353,7 +351,7 @@ export default function Hero() {
               />
 
               <motion.div
-                className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96"
+                className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80"
                 animate={{
                   y: [-5, 5, -5]
                 }}
@@ -446,10 +444,20 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 2.0 }}
         whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={(e) => {
+          e.preventDefault()
+          const aboutSection = document.getElementById('about')
+          if (aboutSection) {
+            aboutSection.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            })
+          }
+        }}
       >
         <motion.div
-          className="p-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+          className="p-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg cursor-pointer"
           animate={{
             y: [-5, 5, -5]
           }}
@@ -457,6 +465,14 @@ export default function Hero() {
             duration: 2,
             repeat: Infinity,
             ease: "easeInOut"
+          }}
+          whileHover={{
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            borderColor: "rgba(255, 255, 255, 0.4)"
+          }}
+          whileTap={{
+            scale: 0.9,
+            backgroundColor: "rgba(255, 255, 255, 0.3)"
           }}
         >
           <ChevronDown className="w-6 h-6 text-white" />

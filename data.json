@@ -7,7 +7,7 @@
       "Sales Manager",
       "Marketing Manager"
     ],
-    "description": "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
+    "description": "Experienced media professional with 12+ years of expertise in production, marketing, and team leadership in Dubai's dynamic industry.",
     "profileImage": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
   },
   "photos": [
@@ -38,50 +38,29 @@
   ],
   "videos": [
     {
-      "title": "Portfolio Video 1",
-      "description": "A professional video showcase from our portfolio.",
+      "title": "Video 1",
+      "description": "Professional video showcasing my work",
       "category": "Corporate",
-      "url": "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop&crop=center"
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.22.59 AM.mp4",
+      "thumbnail": "/video-production-thumbnail.png"
     },
     {
-      "title": "Portfolio Video 2",
-      "description": "Highlights from a creative project.",
+      "title": "Video 2",
+      "description": "High-quality corporate video production",
       "category": "Event",
-      "url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=600&fit=crop&crop=center"
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.01 AM.mp4",
+      "thumbnail": "/video-production-thumbnail.png"
     },
     {
-      "title": "Portfolio Video 3",
-      "description": "Showcasing our video production skills.",
+      "title": "Video 3",
+      "description": "Creative video production showcase",
       "category": "Corporate",
-      "url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&crop=center"
-    },
-    {
-      "title": "Portfolio Video 4",
-      "description": "A dynamic video presentation.",
-      "category": "Event",
-      "url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=600&fit=crop&crop=center"
-    },
-    {
-      "title": "Portfolio Video 5",
-      "description": "Creative storytelling through video.",
-      "category": "Corporate",
-      "url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=600&fit=crop&crop=center"
-    },
-    {
-      "title": "Portfolio Video 6",
-      "description": "Professional video content creation.",
-      "category": "Event",
-      "url": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop&crop=center"
+      "url": "/video/WhatsApp Video 2025-09-30 at 12.23.04 AM.mp4",
+      "thumbnail": "/video-production-thumbnail.png"
     }
   ],
   "about": {
-    "title": "Golden Visa Holder",
+    "title": "Media Industry Expert",
     "profileImage": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/WhatsApp%20Image%202025-09-30%20at%2012.18.16%20AM-Du2MSqMkvpngprQPjx6MyLl6NuUz3v.jpeg",
     "content": "I am an Executive Producer (filmmaker), HR, Sales Manager, and Marketing Manager with 12 years of experience in the media industry. Seeking a senior position that leverages my skills in developing and executing marketing strategies, producing multimedia content, and leading creative teams to deliver exceptional results.\n\nMy expertise includes developing and executing marketing strategies, positioning, research, and branding for various production companies and Media Zone Authority \"twofour54\". I specialize in producing multimedia content for TV, web, and social media platforms, including documentaries, commercials, and corporate videos.\n\nWith a proven track record in managing sales and business development activities, I've generated over $5 million in revenue and secured long-term partnerships with key clients. I take pride in leading and mentoring teams of up to 20 creative professionals, enhancing employee relations and performance.",
     "stats": [
@@ -194,7 +173,7 @@
     }
   ],
   "contact": {
-    "email": "rumanw99@gmail.com",
+    "email": "Hussam.awa@icloud.com",
     "phone": "+971 50 1883240",
     "location": "Dubai Sports City, UAE",
     "linkedin": "https://www.linkedin.com/in/hussam-awa-aaa47998/",
@@ -207,7 +186,7 @@
   "settings": {
     "name": "Hussam Awa",
     "title": "",
-    "email": "rumanw99@gmail.com",
+    "email": "Hussam.awa@icloud.com",
     "phone": "0958",
     "linkedin": "",
     "profilePhoto": ""

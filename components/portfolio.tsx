@@ -8,13 +8,13 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { Skeleton } from "@/components/ui/skeleton"
 import Image from "next/image"
 
-// VideoThumbnail component using predefined thumbnails
+// VideoThumbnail component using video first frame as thumbnail
 const VideoThumbnail = ({ src, alt, className, thumbnail }: { src: string; alt: string; className?: string; thumbnail?: string }) => {
   const [loading, setLoading] = useState(true)
-  const [imageError, setImageError] = useState(false)
+  const [videoError, setVideoError] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false)
     }, 300)
@@ -22,9 +22,19 @@ const VideoThumbnail = ({ src, alt, className, thumbnail }: { src: string; alt: 
     return () => clearTimeout(timer)
   }, [src])
 
-  const handleImageError = () => {
-    setImageError(true)
+  const handleVideoError = () => {
+    setVideoError(true)
     setLoading(false)
+  }
+
+  const handleVideoLoaded = () => {
+    setLoading(false)
+    // Seek to first frame
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0.1
+      // Pause the video to show first frame
+      videoRef.current.pause()
+    }
   }
 
   return (
@@ -33,22 +43,27 @@ const VideoThumbnail = ({ src, alt, className, thumbnail }: { src: string; alt: 
         <div className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center">
           <Video className="w-8 h-8 text-gray-400" />
         </div>
-      ) : thumbnail && !imageError ? (
-        <Image
-          src={thumbnail}
-          alt={alt}
-          fill
-          className="object-cover"
-          onError={handleImageError}
-          onLoad={() => setLoading(false)}
-        />
-      ) : (
+      ) : videoError ? (
         <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
           <div className="text-center text-white">
             <Video className="w-16 h-16 mx-auto mb-2 text-white/80" />
             <p className="text-sm font-medium">Video Preview</p>
           </div>
         </div>
+      ) : (
+        <video
+          ref={videoRef}
+          src={src}
+          className="w-full h-full object-cover"
+          muted
+          preload="metadata"
+          onError={handleVideoError}
+          onLoadedData={handleVideoLoaded}
+          onCanPlay={handleVideoLoaded}
+          playsInline
+          webkit-playsinline="true"
+          poster=""
+        />
       )}
     </div>
   )
@@ -177,6 +192,7 @@ export default function Portfolio() {
         // Use videos from API only (convert format)
         const formattedVideos = videosData.map((v: any) => ({
           src: v.url,
+          url: v.url, // Keep both for compatibility
           thumbnail: v.thumbnail || '/placeholder.svg',
           title: v.title,
           description: v.description
@@ -285,6 +301,13 @@ export default function Portfolio() {
       id="portfolio"
       ref={sectionRef}
       className="py-24 text-white relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      style={{
+        background: `
+          radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.05) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+          linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%)
+        `
+      }}
     >
       <Particles width={windowSize.width} height={windowSize.height} />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -293,10 +316,10 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <motion.div
-            className="inline-flex items-center gap-4 mb-6"
+            className="inline-flex items-center gap-6 mb-8"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -314,12 +337,12 @@ export default function Portfolio() {
                 ease: "easeInOut"
               }}
             >
-              <Sparkles className="w-12 h-12 text-yellow-400 dark:text-yellow-300 drop-shadow-2xl" />
+              <Sparkles className="w-16 h-16 text-yellow-400 dark:text-yellow-300 drop-shadow-2xl" />
               <motion.div
-                className="absolute inset-0 rounded-full bg-yellow-400/20 blur-xl"
+                className="absolute inset-0 rounded-full bg-yellow-400/30 blur-2xl"
                 animate={{ 
                   scale: [1, 1.5, 1],
-                  opacity: [0.3, 0.6, 0.3]
+                  opacity: [0.3, 0.8, 0.3]
                 }}
                 transition={{ 
                   duration: 2,
@@ -328,26 +351,106 @@ export default function Portfolio() {
                 }}
               />
             </motion.div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 drop-shadow-2xl">
-          Portfolio
-        </h2>
+            <div className="relative">
+              <motion.h2 
+                className="text-4xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 drop-shadow-2xl"
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                style={{
+                  backgroundSize: "200% 200%"
+                }}
+              >
+                Portfolio
+              </motion.h2>
+              
+              {/* Multiple glow layers */}
+              <motion.div
+                className="absolute -inset-4 bg-gradient-to-r from-yellow-400/10 to-yellow-500/10 blur-3xl rounded-3xl"
+                animate={{ 
+                  opacity: [0.2, 0.4, 0.2],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              <motion.div
+                className="absolute -inset-8 bg-gradient-to-r from-yellow-400/5 to-yellow-500/5 blur-2xl rounded-3xl"
+                animate={{ 
+                  opacity: [0.1, 0.2, 0.1],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1
+                }}
+              />
+              
+              {/* Floating particles around title */}
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-yellow-400 rounded-full"
+                  style={{
+                    left: `${20 + i * 15}%`,
+                    top: `${-10 + i * 5}%`,
+                  }}
+                  animate={{
+                    y: [-5, 5, -5],
+                    opacity: [0.3, 0.8, 0.3],
+                    scale: [0.8, 1.2, 0.8]
+                  }}
+                  transition={{
+                    duration: 2 + i * 0.3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.2
+                  }}
+                />
+              ))}
+            </div>
           </motion.div>
           
           <motion.div
-            className="relative inline-block mb-8"
+            className="relative inline-block mb-12"
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="w-32 h-2 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 rounded-full shadow-2xl" />
+            <div className="w-48 h-3 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 rounded-full shadow-2xl relative overflow-hidden">
+              {/* Animated shine effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                animate={{
+                  x: ["-100%", "100%"]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </div>
+            
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 rounded-full"
               animate={{ 
                 boxShadow: [
-                  "0 0 20px rgba(251, 191, 36, 0.5)",
-                  "0 0 40px rgba(251, 191, 36, 0.8)",
-                  "0 0 20px rgba(251, 191, 36, 0.5)"
+                  "0 0 30px rgba(251, 191, 36, 0.6)",
+                  "0 0 60px rgba(251, 191, 36, 0.9)",
+                  "0 0 30px rgba(251, 191, 36, 0.6)"
                 ]
               }}
               transition={{ 
@@ -356,10 +459,33 @@ export default function Portfolio() {
                 ease: "easeInOut"
               }}
             />
+            
+            {/* Floating dots around the line */}
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+                style={{
+                  left: `${25 + i * 20}%`,
+                  top: `${-8 + i * 4}%`,
+                }}
+                animate={{
+                  y: [-3, 3, -3],
+                  opacity: [0.4, 1, 0.4],
+                  scale: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 1.5 + i * 0.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3
+                }}
+              />
+            ))}
           </motion.div>
           
           <motion.p
-            className="text-xl md:text-2xl mb-8 text-yellow-100 dark:text-yellow-50 max-w-4xl mx-auto font-light tracking-wide leading-relaxed drop-shadow-lg"
+            className="text-lg md:text-xl mb-12 text-yellow-100 dark:text-yellow-50 max-w-4xl mx-auto font-light tracking-wide leading-relaxed drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -392,7 +518,7 @@ export default function Portfolio() {
             <motion.button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`relative px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-500 overflow-hidden group ${
+              className={`relative px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-500 overflow-hidden group cursor-pointer ${
                 selectedCategory === category
                   ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 shadow-2xl shadow-yellow-500/50"
                   : "bg-white/10 backdrop-blur-sm border-2 border-yellow-400/50 text-yellow-300 hover:bg-yellow-400/20 hover:border-yellow-400 hover:text-yellow-200"
@@ -408,7 +534,6 @@ export default function Portfolio() {
                   ? "0 10px 30px rgba(251, 191, 36, 0.6)"
                   : "0 5px 20px rgba(251, 191, 36, 0.3)"
               }}
-              whileTap={{ scale: 0.95 }}
               aria-pressed={selectedCategory === category}
               aria-label={`Filter portfolio by ${category}`}
             >
@@ -443,30 +568,108 @@ export default function Portfolio() {
           viewport={{ once: true }}
         >
         <Tabs defaultValue="photos" className="w-full">
-            <TabsList className="mb-12 bg-white/10 backdrop-blur-sm border-2 border-yellow-400/30 rounded-2xl p-2 shadow-2xl">
+            <motion.div
+              className="relative mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {/* Animated background glow */}
+              <motion.div
+                className="absolute -inset-4 bg-gradient-to-r from-yellow-400/10 to-blue-500/10 blur-2xl rounded-3xl"
+                animate={{
+                  opacity: [0.2, 0.4, 0.2],
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              
+              <TabsList className="relative bg-white/10 backdrop-blur-sm border-2 border-yellow-400/30 rounded-3xl p-3 shadow-2xl">
             <TabsTrigger
               value="photos"
-                className="relative px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 hover:text-yellow-200 group"
+                className="relative px-8 py-4 rounded-3xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 hover:text-yellow-200 group cursor-pointer overflow-hidden"
             >
-                <span className="flex items-center gap-2">
-                  <Camera className="w-4 h-4" />
-              Photos
+                {/* Animated background */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  animate={{
+                    background: [
+                      "linear-gradient(45deg, rgba(251, 191, 36, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)",
+                      "linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(251, 191, 36, 0.05) 100%)",
+                      "linear-gradient(45deg, rgba(251, 191, 36, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
+                <span className="relative flex items-center gap-2">
+                  <motion.div
+                    animate={{
+                      rotate: [0, 360]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Camera className="w-4 h-4" />
+                  </motion.div>
+                  Photos
                 </span>
             </TabsTrigger>
             <TabsTrigger
               value="videos"
-                className="relative px-8 py-4 rounded-xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 hover:text-yellow-200 group"
+                className="relative px-8 py-4 rounded-3xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 hover:text-yellow-200 group cursor-pointer overflow-hidden"
             >
-                <span className="flex items-center gap-2">
-                  <Video className="w-4 h-4" />
-              Videos
+                {/* Animated background */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-yellow-400/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  animate={{
+                    background: [
+                      "linear-gradient(45deg, rgba(251, 191, 36, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)",
+                      "linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(251, 191, 36, 0.05) 100%)",
+                      "linear-gradient(45deg, rgba(251, 191, 36, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)"
+                    ]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
+                <span className="relative flex items-center gap-2">
+                  <motion.div
+                    animate={{
+                      rotate: [0, 360]
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Video className="w-4 h-4" />
+                  </motion.div>
+                  Videos
                 </span>
             </TabsTrigger>
           </TabsList>
+            </motion.div>
 
           <TabsContent value="photos">
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -488,7 +691,7 @@ export default function Portfolio() {
                 filteredPhotos.map((photo, index) => (
                   <motion.div
                     key={index}
-                      className="group relative overflow-hidden rounded-2xl shadow-2xl aspect-square cursor-pointer bg-gradient-to-br from-yellow-400/10 to-blue-500/10 backdrop-blur-sm border border-yellow-400/20"
+                      className="group relative overflow-hidden rounded-3xl shadow-2xl aspect-square cursor-pointer bg-gradient-to-br from-yellow-400/10 to-blue-500/10 backdrop-blur-sm border-2 border-yellow-400/30"
                     onClick={() => setSelectedPhoto(photo.url)}
                     tabIndex={0}
                     onKeyDown={(e) => {
@@ -500,14 +703,55 @@ export default function Portfolio() {
                     variants={itemVariants}
                     transition={childTransition}
                     whileHover={{
-                        scale: 1.08,
-                        y: -8,
-                        boxShadow: "0 20px 40px rgba(251, 191, 36, 0.4), 0 0 0 1px rgba(251, 191, 36, 0.2)",
+                        scale: 1.05,
+                        y: -12,
+                        boxShadow: "0 25px 50px rgba(251, 191, 36, 0.5), 0 0 0 2px rgba(251, 191, 36, 0.3)",
                         transition: { duration: 0.4, ease: "easeOut" }
                     }}
                   >
+                    {/* Animated background gradient */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-yellow-400/3 to-blue-500/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      animate={{
+                        background: [
+                          "linear-gradient(45deg, rgba(251, 191, 36, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)",
+                          "linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(251, 191, 36, 0.05) 100%)",
+                          "linear-gradient(45deg, rgba(251, 191, 36, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%)"
+                        ]
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                    
+                    {/* Floating particles inside card */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      {[...Array(3)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-1 h-1 bg-yellow-400/60 rounded-full"
+                          style={{
+                            left: `${20 + i * 30}%`,
+                            top: `${20 + i * 25}%`,
+                          }}
+                          animate={{
+                            y: [-10, 10, -10],
+                            opacity: [0.3, 0.8, 0.3],
+                            scale: [0.5, 1, 0.5]
+                          }}
+                          transition={{
+                            duration: 2 + i * 0.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: i * 0.5
+                          }}
+                        />
+                      ))}
+                    </div>
                     {!loadedImages.has(photo.url) && (
-                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-blue-500/20 animate-pulse rounded-2xl" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 to-blue-500/20 animate-pulse rounded-3xl" />
                     )}
                     <Image
                       src={photo.url || "/placeholder.svg"}
@@ -522,24 +766,81 @@ export default function Portfolio() {
                     />
                       
                       {/* Enhanced overlay with gradient and glow */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-6">
+                        {/* Animated shine effect on overlay */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                          animate={{
+                            x: ["-100%", "100%"]
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.5
+                          }}
+                        />
+                        
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           whileHover={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <h3 className="text-xl font-bold text-white mb-2 drop-shadow-lg">{photo.title}</h3>
-                          <p className="text-sm text-yellow-100 mb-4 leading-relaxed">{photo.description}</p>
-                          <div className="flex items-center gap-2 text-yellow-300">
-                            <Camera className="w-4 h-4" />
+                          <motion.h3 
+                            className="text-lg font-bold text-white mb-2 drop-shadow-lg"
+                            animate={{
+                              textShadow: [
+                                "0 0 10px rgba(251, 191, 36, 0.3)",
+                                "0 0 20px rgba(251, 191, 36, 0.6)",
+                                "0 0 10px rgba(251, 191, 36, 0.3)"
+                              ]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                          >
+                            {photo.title}
+                          </motion.h3>
+                          
+                          <motion.p 
+                            className="text-sm text-yellow-100 mb-4 leading-relaxed"
+                            initial={{ opacity: 0 }}
+                            whileHover={{ opacity: 1 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                          >
+                            {photo.description}
+                          </motion.p>
+                          
+                          <motion.div 
+                            className="flex items-center gap-2 text-yellow-300"
+                            whileHover={{
+                              scale: 1.05,
+                              x: 5
+                            }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <motion.div
+                              animate={{
+                                rotate: [0, 360]
+                              }}
+                              transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                              }}
+                            >
+                              <Camera className="w-4 h-4" />
+                            </motion.div>
                             <span className="text-xs font-medium uppercase tracking-wider">View Details</span>
-                    </div>
+                          </motion.div>
                         </motion.div>
                       </div>
                       
                       {/* Glow effect on hover */}
                       <motion.div
-                        className="absolute inset-0 rounded-2xl"
+                        className="absolute inset-0 rounded-3xl"
                         initial={{ opacity: 0 }}
                         whileHover={{ 
                           opacity: 1,
@@ -555,7 +856,7 @@ export default function Portfolio() {
 
           <TabsContent value="videos">
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
@@ -577,7 +878,7 @@ export default function Portfolio() {
                   videos.map((video, index) => (
                 <motion.div
                   key={video.src}
-                      className="group relative cursor-pointer rounded-2xl overflow-hidden shadow-2xl aspect-video bg-gradient-to-br from-yellow-400/10 to-blue-500/10 backdrop-blur-sm border border-yellow-400/20"
+                      className="group relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl aspect-video bg-gradient-to-br from-yellow-400/10 to-blue-500/10 backdrop-blur-sm border border-yellow-400/20"
                   onClick={() => setSelectedVideoIndex(index)}
                   tabIndex={0}
                   onKeyDown={(e) => {
@@ -601,17 +902,17 @@ export default function Portfolio() {
                     className="w-full h-full"
                     thumbnail={video.thumbnail}
                   />
-                      
-                      {/* Enhanced play button overlay */}
-                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/40 transition-all duration-500">
+                  
+                  {/* Play button overlay */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <motion.div
-                          className="rounded-full p-6 bg-gradient-to-r from-yellow-400 to-yellow-500 shadow-2xl group-hover:scale-110 transition-all duration-300"
+                      className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center shadow-2xl cursor-pointer"
                       whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                          <Play className="w-8 h-8 text-blue-900" fill="currentColor" />
-                        </motion.div>
-                      </div>
+                      <Play className="w-8 h-8 text-blue-900 ml-1" fill="currentColor" />
+                    </motion.div>
+                  </div>
                       
                       {/* Enhanced info overlay */}
                       <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/95 via-black/60 to-transparent">
@@ -631,7 +932,7 @@ export default function Portfolio() {
                       
                       {/* Glow effect on hover */}
                       <motion.div
-                        className="absolute inset-0 rounded-2xl"
+                        className="absolute inset-0 rounded-3xl"
                         initial={{ opacity: 0 }}
                         whileHover={{ 
                           opacity: 1,
@@ -672,18 +973,17 @@ export default function Portfolio() {
             >
               {/* Enhanced close button */}
               <motion.button
-                className="absolute top-6 right-6 text-yellow-400 hover:text-yellow-300 transition-all duration-300 z-10 bg-black/50 backdrop-blur-sm rounded-full p-3 hover:bg-black/70"
+                className="absolute top-6 right-6 text-yellow-400 hover:text-yellow-300 transition-all duration-300 z-10 bg-black/50 backdrop-blur-sm rounded-full p-3 hover:bg-black/70 cursor-pointer"
               onClick={() => setSelectedPhoto(null)}
               aria-label="Close photo modal"
                 whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
               >
                 <X className="w-8 h-8 drop-shadow-lg" />
               </motion.button>
               
               {/* Enhanced navigation buttons */}
               <motion.button
-                className="absolute left-6 top-1/2 transform -translate-y-1/2 text-yellow-400 hover:text-yellow-300 transition-all duration-300 z-10 bg-black/50 backdrop-blur-sm rounded-full p-4 hover:bg-black/70"
+                className="absolute left-6 top-1/2 transform -translate-y-1/2 text-yellow-400 hover:text-yellow-300 transition-all duration-300 z-10 bg-black/50 backdrop-blur-sm rounded-full p-4 hover:bg-black/70 cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation()
                 const currentIndex = filteredPhotos.findIndex(p => p.url === selectedPhoto)
@@ -692,13 +992,12 @@ export default function Portfolio() {
               }}
               aria-label="Previous photo"
                 whileHover={{ scale: 1.1, x: -5 }}
-                whileTap={{ scale: 0.9 }}
               >
                 <span className="text-2xl font-bold">‹</span>
               </motion.button>
               
               <motion.button
-                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-yellow-400 hover:text-yellow-300 transition-all duration-300 z-10 bg-black/50 backdrop-blur-sm rounded-full p-4 hover:bg-black/70"
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-yellow-400 hover:text-yellow-300 transition-all duration-300 z-10 bg-black/50 backdrop-blur-sm rounded-full p-4 hover:bg-black/70 cursor-pointer"
               onClick={(e) => {
                 e.stopPropagation()
                 const currentIndex = filteredPhotos.findIndex(p => p.url === selectedPhoto)
@@ -707,7 +1006,6 @@ export default function Portfolio() {
               }}
               aria-label="Next photo"
                 whileHover={{ scale: 1.1, x: 5 }}
-                whileTap={{ scale: 0.9 }}
               >
                 <span className="text-2xl font-bold">›</span>
               </motion.button>
@@ -725,7 +1023,7 @@ export default function Portfolio() {
                 src={selectedPhoto || "/placeholder.svg"}
                 alt={filteredPhotos.find(p => p.url === selectedPhoto)?.title || "Gallery image"}
                 fill
-                className="object-contain rounded-2xl shadow-2xl"
+                className="object-contain rounded-3xl shadow-2xl"
               />
                 
                 {/* Photo info overlay */}
