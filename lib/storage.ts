@@ -113,7 +113,7 @@ class SimpleStorage {
       hero: {
         name: "Hussam Awa",
         titles: ["Executive Producer", "HR Manager", "Sales Manager", "Marketing Manager"],
-        description: "Golden Visa holder with 12+ years of experience in media production, marketing, and team leadership in Dubai's dynamic industry.",
+        description: "Experienced media professional with 12+ years of expertise in production, marketing, and team leadership in Dubai's dynamic industry.",
         profileImage: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/HUSSAM-6Lk8xXir2XB6TY1T0hIt5MJf8FXFPu.jpg"
       },
       photos: [],
