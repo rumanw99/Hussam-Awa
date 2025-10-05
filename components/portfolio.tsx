@@ -485,7 +485,7 @@ export default function Portfolio() {
           </motion.div>
           
           <motion.p
-            className="text-lg md:text-xl mb-12 text-yellow-100 @dark:text-yellow-100 max-w-4xl mx-auto font-light tracking-wide leading-relaxed drop-shadow-lg"
+            className="text-lg md:text-xl mb-12 text-yellow-100 dark:text-yellow-100 max-w-4xl mx-auto font-light tracking-wide leading-relaxed drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -520,8 +520,8 @@ export default function Portfolio() {
               onClick={() => setSelectedCategory(category)}
               className={`relative px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-500 overflow-hidden group cursor-pointer ${
                 selectedCategory === category
-                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 @dark:text-blue-900 shadow-2xl shadow-yellow-500/50"
-                  : "bg-white/10 @dark:bg-white/5 backdrop-blur-sm border-2 border-yellow-400/50 @dark:border-yellow-400/30 text-yellow-300 @dark:text-yellow-300 hover:bg-yellow-400/20 @dark:hover:bg-yellow-400/10 hover:border-yellow-400 @dark:hover:border-yellow-400/50 hover:text-yellow-200 @dark:hover:text-yellow-200"
+                  ? "bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 dark:text-blue-900 shadow-2xl shadow-yellow-500/50"
+                  : "bg-white/10 dark:bg-white/5 backdrop-blur-sm border-2 border-yellow-400/50 dark:border-yellow-400/30 text-yellow-300 dark:text-yellow-300 hover:bg-yellow-400/20 dark:hover:bg-yellow-400/10 hover:border-yellow-400 dark:hover:border-yellow-400/50 hover:text-yellow-200 dark:hover:text-yellow-200"
               }`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -589,10 +589,10 @@ export default function Portfolio() {
                 }}
               />
               
-              <TabsList className="relative bg-white/10 @dark:bg-white/5 backdrop-blur-sm border-2 border-yellow-400/30 @dark:border-yellow-400/20 rounded-3xl p-3 shadow-2xl">
+              <TabsList className="relative bg-white/10 dark:bg-white/5 backdrop-blur-sm border-2 border-yellow-400/30 dark:border-yellow-400/20 rounded-3xl p-3 shadow-2xl">
             <TabsTrigger
               value="photos"
-                className="relative px-8 py-4 rounded-3xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 @dark:data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 @dark:hover:bg-yellow-400/10 hover:text-yellow-200 @dark:hover:text-yellow-200 group cursor-pointer overflow-hidden"
+                className="relative px-8 py-4 rounded-3xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 dark:data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 dark:hover:bg-yellow-400/10 hover:text-yellow-200 dark:hover:text-yellow-200 group cursor-pointer overflow-hidden"
             >
                 {/* Animated background */}
                 <motion.div
@@ -629,7 +629,7 @@ export default function Portfolio() {
             </TabsTrigger>
             <TabsTrigger
               value="videos"
-                className="relative px-8 py-4 rounded-3xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 @dark:data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 @dark:hover:bg-yellow-400/10 hover:text-yellow-200 @dark:hover:text-yellow-200 group cursor-pointer overflow-hidden"
+                className="relative px-8 py-4 rounded-3xl font-bold text-sm uppercase tracking-wider data-[state=active]:bg-gradient-to-r data-[state=active]:from-yellow-400 data-[state=active]:to-yellow-500 data-[state=active]:text-blue-900 dark:data-[state=active]:text-blue-900 data-[state=active]:shadow-2xl data-[state=active]:shadow-yellow-500/50 transition-all duration-500 hover:bg-yellow-400/20 dark:hover:bg-yellow-400/10 hover:text-yellow-200 dark:hover:text-yellow-200 group cursor-pointer overflow-hidden"
             >
                 {/* Animated background */}
                 <motion.div
@@ -691,7 +691,7 @@ export default function Portfolio() {
                 filteredPhotos.map((photo, index) => (
                   <motion.div
                     key={index}
-                      className="group relative overflow-hidden rounded-3xl shadow-2xl aspect-square cursor-pointer bg-gradient-to-br from-yellow-400/10 to-blue-500/10 @dark:from-yellow-400/5 @dark:to-blue-500/5 backdrop-blur-sm border-2 border-yellow-400/30 @dark:border-yellow-400/20"
+                      className="group relative overflow-hidden rounded-3xl shadow-2xl aspect-square cursor-pointer bg-gradient-to-br from-yellow-400/10 to-blue-500/10 dark:from-yellow-400/5 dark:to-blue-500/5 backdrop-blur-sm border-2 border-yellow-400/30 dark:border-yellow-400/20"
                     onClick={() => setSelectedPhoto(photo.url)}
                     tabIndex={0}
                     onKeyDown={(e) => {
@@ -878,7 +878,7 @@ export default function Portfolio() {
                   videos.map((video, index) => (
                 <motion.div
                   key={video.src}
-                      className="group relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl aspect-video bg-gradient-to-br from-yellow-400/10 to-blue-500/10 @dark:from-yellow-400/5 @dark:to-blue-500/5 backdrop-blur-sm border border-yellow-400/20 @dark:border-yellow-400/10"
+                      className="group relative cursor-pointer rounded-3xl overflow-hidden shadow-2xl aspect-video bg-gradient-to-br from-yellow-400/10 to-blue-500/10 dark:from-yellow-400/5 dark:to-blue-500/5 backdrop-blur-sm border border-yellow-400/20 dark:border-yellow-400/10"
                   onClick={() => setSelectedVideoIndex(index)}
                   tabIndex={0}
                   onKeyDown={(e) => {
