@@ -132,7 +132,7 @@ export default function AboutAdminPage() {
                 id="title"
                 value={aboutData.title}
                 onChange={(e) => setAboutData({ ...aboutData, title: e.target.value })}
-                placeholder="Golden Visa Holder"
+                placeholder="Media Industry Expert"
                 required
               />
             </div>
