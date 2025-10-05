@@ -301,13 +301,6 @@ export default function Portfolio() {
       id="portfolio"
       ref={sectionRef}
       className="py-24 text-white relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
-      style={{
-        background: `
-          radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.05) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-          linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%)
-        `
-      }}
     >
       <Particles width={windowSize.width} height={windowSize.height} />
       <div className="max-w-7xl mx-auto px-6 relative z-10">
